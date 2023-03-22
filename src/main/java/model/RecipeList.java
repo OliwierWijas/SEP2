@@ -25,4 +25,17 @@ public class RecipeList
   {
     this.recipes.add(recipe);
   }
+
+  public void removeRecipe(Recipe recipe)
+  {
+    for (int i = 0; i < recipes.size(); i++)
+    {
+      if (recipes.get(i).equals(recipe))
+      {
+        this.recipes.remove(recipes.get(i));
+        return;
+      }
+    }
+    throw new IllegalArgumentException("Recipe is not in the system.");
+  }
 }

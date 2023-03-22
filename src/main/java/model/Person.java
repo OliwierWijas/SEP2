@@ -52,6 +52,15 @@ public abstract class Person
     this.recipes.add(recipe);
   }
 
+  public void removeRecipe(Recipe recipe)
+  {
+    for (int i = 0; i < getRecipes().size(); i++)
+    {
+      if (getRecipes().get(i).equals(recipe))
+        getRecipes().remove(getRecipes().get(i));
+    }
+  }
+
   public Recipe getRecipe(Recipe recipe)
   {
     for (int i = 0; i < recipes.size(); i++)

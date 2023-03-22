@@ -103,6 +103,6 @@ public class Recipe
         return false;
     }
 
-    return this.title.equals(other.title) && this.description.equals(other.description);
+    return this.title.equals(other.title) && this.description.equals(other.description) && this.username.equals(other.username);
   }
 }
