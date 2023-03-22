@@ -113,4 +113,14 @@ public class PersonList
     }
     throw new NullPointerException("Person is not in the system.");
   }
+
+  public String toString()
+  {
+    String temp = "";
+    for (int i = 0; i < members.size(); i++)
+    {
+      temp += members.get(i).toString1() + "\n\n";
+    }
+    return temp;
+  }
 }

@@ -15,6 +15,21 @@ public class ModelManager implements Model
     this.administrator = Administrator.getInstance();
   }
 
+  @Override public Member createAccount(String email, String username, String password)
+  {
+    // check if objects have the same recipes and favourites
+    if (email.isEmpty() || email.equals(""))
+      throw new IllegalArgumentException("Email cannot be empty.");
+    else if (username.isEmpty() || username.equals(""))
+      throw new IllegalArgumentException("Username cannot be empty");
+    else if (password.isEmpty() || password.equals(""))
+      throw new IllegalArgumentException("Password cannot be empty.");
+
+    Member member = new Member(email, username, password);
+    this.personList.addMember(member);
+    return member;
+  }
+
   @Override public void addRecipe(String title, String description, ArrayList<Ingredient> ingredients, Person person)
   {
     if (title.isEmpty() || title.equals(""))
@@ -55,8 +70,4 @@ public class ModelManager implements Model
 
     this.personList.removeFromFavourites(recipe, person);
   }
-
-
-
-
 }
