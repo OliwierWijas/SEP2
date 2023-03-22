@@ -12,15 +12,6 @@ public class Member extends Person
     this.favourites = new ArrayList<>();
   }
 
-  public void removeRecipe(Recipe recipe)
-  {
-    for (int i = 0; i < getRecipes().size(); i++)
-    {
-      if (getRecipes().get(i).equals(recipe))
-        getRecipes().remove(getRecipes().get(i));
-    }
-  }
-
   public void addFavourite(Recipe recipe)
   {
     this.favourites.add(recipe);

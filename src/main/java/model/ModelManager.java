@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class ModelManager implements Model
 {
   private RecipeList recipeList;
-  private MemberList memberList;
+  private PersonList personList;
   private final Administrator administrator;
 
   public ModelManager()
   {
     this.recipeList = RecipeList.getInstance();
-    this.memberList = MemberList.getInstance();
+    this.personList = PersonList.getInstance();
     this.administrator = Administrator.getInstance();
   }
 
@@ -28,8 +28,7 @@ public class ModelManager implements Model
     recipe.addAllIngredients(ingredients);
 
     this.recipeList.addRecipe(recipe);
-    this.getMember(person).addRecipe(recipe);
-
+    this.personList.addRecipeToPerson(recipe, person);
   }
 
   @Override public void removeRecipe(Recipe recipe, Person person)
@@ -37,31 +36,24 @@ public class ModelManager implements Model
     if (recipe == null)
       throw new NullPointerException("Recipe not selected");
 
-    for (int i = 0; i < recipes.size(); i++)
-    {
-      if (recipes.get(i).equals(recipe))
-        recipes.remove(recipes.get(i));
-    }
-
-    if (person instanceof Member)
-    {
-      getMember(person).removeRecipe(recipe);
-    }
-
-    else if (person instanceof Administrator)
-    {
-
-    }
+    this.recipeList.removeRecipe(recipe);
+    this.personList.removeRecipeFromPerson(recipe, person);
   }
 
   @Override public void addToFavourites(Recipe recipe, Person person)
   {
+    if (recipe == null)
+      throw new NullPointerException("Recipe not selected");
 
+    this.personList.addToFavourites(recipe, person);
   }
 
   @Override public void removeFromFavourites(Recipe recipe, Person person)
   {
+    if (recipe == null)
+      throw new NullPointerException("Recipe not selected");
 
+    this.personList.removeFromFavourites(recipe, person);
   }
 
 
