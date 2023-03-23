@@ -3,6 +3,7 @@ package viewmodel;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
 import model.Ingredient;
 import model.Model;
 import model.Person;
@@ -15,7 +16,7 @@ public class ManageRecipesViewModel
   private StringProperty searchRecipe;
   private final ListProperty<Recipe> recipesList;
   private final ObjectProperty<Recipe> recipe;
-  private final ListProperty<Ingredient> ingredientsList;
+  private final TableView ingredientTable;
   private final StringProperty error;
 
   private final StringProperty title;
@@ -28,7 +29,7 @@ public class ManageRecipesViewModel
     this.searchRecipe = new SimpleStringProperty("");
     this.recipesList = new SimpleListProperty<>(FXCollections.observableArrayList());
     this.recipe = new SimpleObjectProperty<>();
-    this.ingredientsList = new SimpleListProperty<>(FXCollections.observableArrayList());
+    this.ingredientTable = new TableView<>(FXCollections.observableArrayList());
     this.error = new SimpleStringProperty("");
     this.title = new SimpleStringProperty("");
     this.description = new SimpleStringProperty("");
@@ -83,7 +84,7 @@ public class ManageRecipesViewModel
 
   public void bindIngredientList(ObjectProperty<ObservableList<Ingredient>> property)
   {
-    property.bind(ingredientsList);
+    //property.bind(ingredientsList);
   }
 
   public void reset()
@@ -95,11 +96,11 @@ public class ManageRecipesViewModel
 
   public void resetRecipesList()
   {
-    recipesList.setAll(model.getAllRecipes);
+    //recipesList.setAll(model.getAllRecipes);
   }
 
   public void resetIngredientsList()
   {
-    recipesList.setAll(model.getAllIngredients);
+    //recipesList.setAll(model.getAllIngredients);
   }
 }
