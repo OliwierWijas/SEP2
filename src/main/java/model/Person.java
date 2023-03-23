@@ -76,6 +76,16 @@ public abstract class Person
     return username;
   }
 
+  public String toString1()
+  {
+    String temp = username;
+    for (int i = 0; i < recipes.size(); i++)
+    {
+      temp += "\n" + recipes.get(i).toString1();
+    }
+    return temp;
+  }
+
   public boolean equals(Object obj)
   {
     if (obj == null || obj.getClass() != getClass())
@@ -84,6 +94,9 @@ public abstract class Person
     }
 
     Person other = (Person) obj;
+
+    if (this.recipes.size() != other.recipes.size())
+      return false;
 
     for (int i = 0; i < recipes.size(); i++)
     {

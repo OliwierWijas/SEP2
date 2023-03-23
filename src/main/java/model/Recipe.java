@@ -97,6 +97,9 @@ public class Recipe
 
     Recipe other = (Recipe) obj;
 
+    if (this.ingredients.size() != other.ingredients.size())
+      return false;
+
     for (int i = 0; i < ingredients.size(); i++)
     {
       if (!ingredients.get(i).equals(other.ingredients.get(i)))
@@ -104,5 +107,15 @@ public class Recipe
     }
 
     return this.title.equals(other.title) && this.description.equals(other.description) && this.username.equals(other.username);
+  }
+
+  public String toString1()
+  {
+    String temp = title + "\n" + description + "\n" + username + "\ningredients:";
+    for (int i = 0; i < ingredients.size(); i++)
+    {
+      temp += "\n" + ingredients.get(i);
+    }
+    return temp;
   }
 }

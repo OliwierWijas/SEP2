@@ -48,4 +48,14 @@ public class Member extends Person
 
     return super.equals(other);
   }
+
+  public String toString1()
+  {
+    String temp = super.toString1() + "\nfavourites:";
+    for (int i = 0; i < favourites.size(); i++)
+    {
+      temp += "\n" + favourites.get(i).toString1();
+    }
+    return temp;
+  }
 }

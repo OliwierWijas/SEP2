@@ -38,4 +38,14 @@ public class RecipeList
     }
     throw new IllegalArgumentException("Recipe is not in the system.");
   }
+
+  public String toString()
+  {
+    String temp = "";
+    for (int i = 0; i < recipes.size(); i++)
+    {
+      temp += recipes.get(i).toString1() + "\n\n";
+    }
+    return temp;
+  }
 }
