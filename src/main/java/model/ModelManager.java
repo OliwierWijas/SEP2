@@ -6,12 +6,14 @@ public class ModelManager implements Model
 {
   private RecipeList recipeList;
   private PersonList personList;
+  private IngredientList ingredientList;
   private final Administrator administrator;
 
   public ModelManager()
   {
     this.recipeList = RecipeList.getInstance();
     this.personList = PersonList.getInstance();
+    this.ingredientList = IngredientList.getInstance();
     this.administrator = Administrator.getInstance();
   }
 
@@ -69,5 +71,15 @@ public class ModelManager implements Model
       throw new NullPointerException("Recipe not selected");
 
     this.personList.removeFromFavourites(recipe, person);
+  }
+
+  @Override public ArrayList<Ingredient> getAllIngredients()
+  {
+    return ingredientList.getIngredients();
+  }
+
+  @Override public void addIngredient(Ingredient ingredient)
+  {
+    this.ingredientList.addIngredient(ingredient);
   }
 }

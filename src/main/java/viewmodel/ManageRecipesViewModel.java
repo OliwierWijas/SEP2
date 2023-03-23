@@ -18,6 +18,7 @@ public class ManageRecipesViewModel
   private final ListProperty<Recipe> recipesList;
   private final ObjectProperty<Recipe> recipe;
   private final ListProperty<Ingredient> ingredientList;
+  private final SimpleListProperty<Ingredient> selectedIngredientList;
   private final StringProperty error;
   private final StringProperty title;
   private final StringProperty description;
@@ -31,9 +32,11 @@ public class ManageRecipesViewModel
     this.recipesList = new SimpleListProperty<>(FXCollections.observableArrayList());
     this.recipe = new SimpleObjectProperty<>();
     this.ingredientList = new SimpleListProperty<>(FXCollections.observableArrayList());
+    this.selectedIngredientList = new SimpleListProperty<>(FXCollections.observableArrayList());
     this.error = new SimpleStringProperty("");
     this.title = new SimpleStringProperty("");
     this.description = new SimpleStringProperty("");
+    resetIngredientList();
   }
 
   public void addRecipe()
@@ -93,6 +96,11 @@ public class ManageRecipesViewModel
     property.bind(ingredientList);
   }
 
+  public void bindSelectedIngredientList(SimpleListProperty<Ingredient> property)
+  {
+    this.selectedIngredientList.bind(property);
+  }
+
   public void reset()
   {
     title.set("");
@@ -107,6 +115,6 @@ public class ManageRecipesViewModel
 
   public void resetIngredientList()
   {
-    //recipesList.setAll(model.getAllIngredients);
+    ingredientList.setAll(model.getAllIngredients());
   }
 }
