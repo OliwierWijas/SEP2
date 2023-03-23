@@ -12,8 +12,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ManageRecipesViewController">
    <children>
-      <ListView layoutX="14.0" layoutY="81.0" prefHeight="600.0" prefWidth="680.0" />
-      <TextField layoutX="14.0" layoutY="42.0" prefHeight="25.0" prefWidth="683.0" promptText="Type the title..." />
+      <ListView fx:id="recipeListView" layoutX="14.0" layoutY="81.0" prefHeight="600.0" prefWidth="680.0" />
+      <TextField fx:id="searchRecipeTextField" layoutX="14.0" layoutY="42.0" onKeyTyped="#recipeChangeListener" prefHeight="25.0" prefWidth="683.0" promptText="Type the title..." />
       <MenuBar prefHeight="25.0" prefWidth="1000.0">
         <menus>
           <Menu mnemonicParsing="false" text="Home">
@@ -35,7 +35,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TextField layoutX="719.0" layoutY="42.0" prefHeight="25.0" prefWidth="264.0" promptText="Type the ingredient..." />
+      <TextField fx:id="searchIngredientTextField" layoutX="713.0" layoutY="42.0" onKeyTyped="#ingredientChangeListener" prefHeight="26.0" prefWidth="270.0" promptText="Type the ingredient..." />
       <TableView fx:id="ingredientTable" layoutX="713.0" layoutY="79.0" prefHeight="560.0" prefWidth="270.0">
         <columns>
           <TableColumn fx:id="nameCell" prefWidth="229.0" text="Name of ingredient" />

@@ -3,12 +3,12 @@ package viewmodel;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import model.Ingredient;
 import model.Model;
 import model.Person;
 import model.Recipe;
+
+import java.util.ArrayList;
 
 public class ManageRecipesViewModel
 {
@@ -37,6 +37,7 @@ public class ManageRecipesViewModel
     this.title = new SimpleStringProperty("");
     this.description = new SimpleStringProperty("");
     resetIngredientList();
+    resetRecipesList();
   }
 
   public void addRecipe()
@@ -58,6 +59,19 @@ public class ManageRecipesViewModel
     } catch (Exception e)
     {
       error.set(e.getMessage());
+    }
+  }
+
+  public void getRecipeByIngredients()
+  {
+    if (!ingredientList.isEmpty())
+    {
+      ArrayList<Recipe> temp = model.getAllRecipes();
+      recipesList.clear();
+      for (int i = 0; i < temp.size(); i++)
+      {
+
+      }
     }
   }
 
@@ -101,6 +115,28 @@ public class ManageRecipesViewModel
     this.selectedIngredientList.bind(property);
   }
 
+  public void containRecipe(String text)
+  {
+    ArrayList<Recipe> temp = model.getAllRecipes();
+    recipesList.clear();
+    for (int i = 0; i < temp.size(); i++)
+    {
+      if (temp.get(i).getTitle().contains(text))
+        recipesList.add(temp.get(i));
+    }
+  }
+
+  public void containIngredient(String text)
+  {
+    ArrayList<Ingredient> temp = model.getAllIngredients();
+    ingredientList.clear();
+    for (int i = 0; i < temp.size(); i++)
+    {
+      if (temp.get(i).getName().contains(text))
+        ingredientList.add(temp.get(i));
+    }
+  }
+
   public void reset()
   {
     title.set("");
@@ -110,7 +146,7 @@ public class ManageRecipesViewModel
 
   public void resetRecipesList()
   {
-    //recipesList.setAll(model.getAllRecipes);
+    recipesList.setAll(model.getAllRecipes());
   }
 
   public void resetIngredientList()
