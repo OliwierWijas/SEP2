@@ -1,6 +1,5 @@
 package model;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.CheckBox;
 
 public class Ingredient

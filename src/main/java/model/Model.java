@@ -9,4 +9,6 @@ public interface Model
   void removeRecipe(Recipe recipe, Person person);
   void addToFavourites(Recipe recipe, Person person);
   void removeFromFavourites(Recipe recipe, Person person);
+  ArrayList<Ingredient> getAllIngredients();
+  void addIngredient(Ingredient ingredient);
 }

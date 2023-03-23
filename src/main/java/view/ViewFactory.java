@@ -11,7 +11,8 @@ public class ViewFactory
 
   public ViewFactory(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
   {
-    manageRecipesViewLoader = new ManageRecipesViewLoader("ManageRecipes.fxml", viewHandler, viewModelFactory);
+    manageRecipesViewLoader = new ManageRecipesViewLoader(
+        "ManageRecipes.fxml", viewHandler, viewModelFactory);
   }
 
   public Region load(String id)
