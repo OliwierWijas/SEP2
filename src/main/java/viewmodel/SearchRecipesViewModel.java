@@ -18,7 +18,7 @@ public class SearchRecipesViewModel
   private final ListProperty<Recipe> recipesList;
   private final ObjectProperty<Recipe> recipe;
   private final ListProperty<Ingredient> ingredientList;
-  private final SimpleListProperty<Ingredient> selectedIngredientList;
+  private final ListProperty<Ingredient> selectedIngredientList;
   private final StringProperty error;
   private final StringProperty title;
   private final StringProperty description;
