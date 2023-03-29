@@ -83,6 +83,11 @@ public class Recipe
     return (double) this.sum / this.numberOfRatings;
   }
 
+  public boolean ifRecipeContainsIngredients(ArrayList<Ingredient> ingredientsList)
+  {
+    return ingredients.containsAll(ingredientsList);
+  }
+
   public String toString()
   {
     return title;

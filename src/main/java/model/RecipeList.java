@@ -39,6 +39,11 @@ public class RecipeList
     throw new IllegalArgumentException("Recipe is not in the system.");
   }
 
+  public ArrayList<Recipe> getRecipes()
+  {
+    return recipes;
+  }
+
   public String toString()
   {
     String temp = "";

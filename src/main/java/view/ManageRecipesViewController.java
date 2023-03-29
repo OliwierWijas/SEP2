@@ -1,51 +1,77 @@
 package view;
 
-import javafx.beans.property.ReadOnlyListProperty;
-import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import model.Ingredient;
-import model.IngredientList;
+import model.Recipe;
 import viewmodel.ManageRecipesViewModel;
-
-import java.util.ArrayList;
 
 public class ManageRecipesViewController implements ViewController
 {
-  @FXML private TableView<Ingredient> ingredientTable;
-  @FXML private TableColumn<Ingredient, String> nameCell;
-  @FXML private TableColumn<Ingredient, CheckBox> selectCell;
-  @FXML private SimpleListProperty<Ingredient> selectedIngredientList;
+  @FXML private TextField searchRecipeTextField;
+  @FXML private ListView<Recipe> recipeListView;
+  @FXML private TextField titleTextField;
+  @FXML private TextField ingredientTextField;
+  @FXML private ListView<Ingredient> ingredientListView;
+  @FXML private TextArea descriptionTextArea;
+
+  private ReadOnlyObjectProperty<Recipe> recipe;
 
   private ViewHandler viewHandler;
   private ManageRecipesViewModel viewModel;
   private Region root;
 
-  public void init(ViewHandler viewHandler, ManageRecipesViewModel viewModel, Region root)
+  public void init(ViewHandler viewHandler, ManageRecipesViewModel manageRecipesViewModel, Region root)
   {
     this.viewHandler = viewHandler;
-    this.viewModel = viewModel;
+    this.viewModel = manageRecipesViewModel;
     this.root = root;
-    this.selectedIngredientList = new SimpleListProperty<>();
-    this.nameCell.setCellValueFactory(new PropertyValueFactory<>("name"));
-    this.selectCell.setCellValueFactory(new PropertyValueFactory<>("select"));
-    this.viewModel.bindIngredientList(ingredientTable.itemsProperty());
-    this.viewModel.bindSelectedIngredientList(selectedIngredientList);
+
+    //bind
   }
 
-  @FXML protected void selectButtonPressed()
+  @FXML protected void addIngredientButtonPressed()
   {
+
+  }
+
+  @FXML protected void addRecipeButtonPressed()
+  {
+
+  }
+
+  @FXML protected void editRecipeButtonPressed()
+  {
+
+  }
+
+  @FXML protected void removeRecipeButtonPressed()
+  {
+
+  }
+
+  @FXML protected void handleMenu(Event event)
+  {
+    if (event.getSource().toString().contains(ViewFactory.RECIPES))
+      viewHandler.openView(ViewFactory.RECIPES);
+    else if (event.getSource().toString().contains(ViewFactory.SEARCH))
+      viewHandler.openView(ViewFactory.SEARCH);
   }
 
   @Override public void reset()
   {
-    viewModel.reset();
+
   }
 
   @Override public Region getRoot()
   {
     return root;
   }
+
 }

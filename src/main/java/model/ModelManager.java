@@ -75,7 +75,12 @@ public class ModelManager implements Model
 
   @Override public ArrayList<Ingredient> getAllIngredients()
   {
-    return ingredientList.getIngredients();
+    return this.ingredientList.getIngredients();
+  }
+
+  @Override public ArrayList<Recipe> getAllRecipes()
+  {
+    return this.recipeList.getRecipes();
   }
 
   @Override public void addIngredient(Ingredient ingredient)
