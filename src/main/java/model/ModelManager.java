@@ -1,5 +1,9 @@
 package model;
 
+import model.validation.EmailValidator;
+import model.validation.PasswordValidator;
+import model.validation.UsernameValidator;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
@@ -24,12 +28,9 @@ public class ModelManager implements Model
   @Override public String createAccount(String email, String username, String password)
   {
     // check if objects have the same recipes and favourites
-    if (email.isEmpty() || email.equals(""))
-      throw new IllegalArgumentException("Email cannot be empty.");
-    else if (username.isEmpty() || username.equals(""))
-      throw new IllegalArgumentException("Username cannot be empty");
-    else if (password.isEmpty() || password.equals(""))
-      throw new IllegalArgumentException("Password cannot be empty.");
+    EmailValidator.validateEmail(email);
+    UsernameValidator.validateUsername(username);
+    PasswordValidator.validatePassword(password);
 
     Member member = new Member(email, username, password);
     this.personList.addMember(member);
