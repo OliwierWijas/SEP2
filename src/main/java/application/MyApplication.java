@@ -23,10 +23,10 @@ public class MyApplication extends Application
     ingredients.add(new Ingredient("tomato"));
     ingredients1.add(new Ingredient("potato"));
     ingredients1.add(new Ingredient("green beans"));
-    Member member1 = new Member("email1", "username1", "password1");
-    Member member2 = new Member("email2", "username2", "password2");
-    model.createAccount("email1", "username1", "password1");
-    model.createAccount("email2", "username2", "password2");
+    Member member1 = new Member("email@via.dk", "username1", "Password1");
+    Member member2 = new Member("email2@via.dk", "username2", "Password2");
+    model.createAccount("email@via.dk", "username1", "Password1");
+    model.createAccount("email2@via.dk", "username2", "Password2");
     model.addRecipe("title1", "description1", ingredients, member1);
     model.addRecipe("title2", "description2", ingredients1, member2);
     ViewModelFactory viewModelFactory = new ViewModelFactory(model);

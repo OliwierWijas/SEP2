@@ -18,10 +18,9 @@ public class Ingredient
     return name;
   }
 
-  public boolean getSelect()
+  public CheckBox getSelect()
   {
-    if(select.isSelected()) return true;
-    return false;
+    return select;
   }
 
   public void setSelect(CheckBox select)
