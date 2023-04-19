@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class PersonList
 {
+  private final static String ADMIN = "admin";
   private static PersonList instance;
   private final ArrayList<Member> members;
   private final Administrator administrator;
@@ -37,41 +38,43 @@ public class PersonList
     }
   }
 
-  public void addRecipeToPerson(Recipe recipe, Person person)
+  public int size()
   {
-    if (person instanceof Member)
-    {
-      getMember(person).addRecipe(recipe);
-    }
-    else if (person instanceof Administrator)
+    return members.size();
+  }
+
+  public ArrayList<Member> getMembers()
+  {
+    return members;
+  }
+
+  public void addRecipeToPerson(Recipe recipe, String username)
+  {
+    if (username.equals(ADMIN))
     {
       this.administrator.addRecipe(recipe);
     }
     else
-      throw new IllegalArgumentException("Person is not in the system.");
+    {
+      getMemberByUsername(username).addRecipe(recipe);
+    }
   }
 
-  public void editPersonRecipe(Recipe recipe, String title, String description, ArrayList<Ingredient> ingredients, Person person)
+  public void editPersonRecipe(Recipe recipe, String title, String description, ArrayList<Ingredient> ingredients, String username)
   {
-    if (person instanceof Member)
-    {
-      getMember(person).editRecipe(recipe, title, description, ingredients);
-    }
-    else if (person instanceof Administrator)
+    if (username.equals(ADMIN))
     {
       this.administrator.editRecipe(recipe, title, description, ingredients);
     }
     else
-      throw new IllegalArgumentException("Person is not in the system.");
+    {
+      getMemberByUsername(username).editRecipe(recipe, title, description, ingredients);
+    }
   }
 
-  public void removeRecipeFromPerson(Recipe recipe, Person person)
+  public void removeRecipeFromPerson(Recipe recipe, String username)
   {
-    if (person instanceof Member)
-    {
-      getMember(person).removeRecipe(recipe);
-    }
-    else if (person instanceof Administrator)
+    if (username.equals(ADMIN))
     {
       for (int i = 0; i < members.size(); i++)
       {
@@ -86,44 +89,43 @@ public class PersonList
         }
       }
       this.administrator.removeRecipe(recipe);
+
     }
     else
-      throw new IllegalArgumentException("Person is not in the system.");
+    {
+      getMemberByUsername(username).removeRecipe(recipe);
+    }
   }
 
-  public void addToFavourites(Recipe recipe, Person person)
+  public void addToFavourites(Recipe recipe, String username)
   {
-    if (person instanceof Member)
+    if (username.equals(ADMIN))
     {
-      getMember(person).addFavourite(recipe);
-    }
-    else if (person instanceof Administrator)
       throw new IllegalArgumentException("Administrator is not allowed to add a recipe to favourites.");
-    else
-      throw new IllegalArgumentException("Person is not in the system.");
-  }
 
-  public void removeFromFavourites(Recipe recipe, Person person)
-  {
-    if (person instanceof Member)
-    {
-      getMember(person).removeFavourite(recipe);
     }
-    else if (person instanceof Administrator)
-      throw new IllegalArgumentException("Administrator is not allowed to add a recipe to favourites.");
     else
-      throw new IllegalArgumentException("Person is not in the system.");
+      getMemberByUsername(username).addFavourite(recipe);
   }
 
-  private Member getMember(Person person)
+  public void removeFromFavourites(Recipe recipe, String username)
   {
-    if (person instanceof Member)
+    if (username.equals(ADMIN))
     {
-      for (int i = 0; i < members.size(); i++)
-      {
-        if (members.get(i).equals(person))
-          return members.get(i);
-      }
+      throw new IllegalArgumentException("Administrator is not allowed to remove a recipe to favourites.");
+
+    }
+    else
+      getMemberByUsername(username).removeFavourite(recipe);
+
+  }
+
+  private Member getMemberByUsername(String username)
+  {
+    for (int i = 0; i < members.size(); i++)
+    {
+      if (members.get(i).getUsername().equals(username))
+        return members.get(i);
     }
     throw new NullPointerException("Person is not in the system.");
   }

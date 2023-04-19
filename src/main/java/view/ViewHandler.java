@@ -20,7 +20,7 @@ public class ViewHandler
   public void start(Stage primaryStage)
   {
     this.primaryStage = primaryStage;
-    openView(ViewFactory.SEARCH);
+    openView(ViewFactory.LOGIN);
   }
 
   public void openView(String id)

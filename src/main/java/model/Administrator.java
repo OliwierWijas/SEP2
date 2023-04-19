@@ -1,6 +1,8 @@
 package model;
 
-public class Administrator extends Person
+import java.io.Serializable;
+
+public class Administrator extends Person implements Serializable
 {
   private static final String USERNAME = "Administrator";
   private static Administrator instance;

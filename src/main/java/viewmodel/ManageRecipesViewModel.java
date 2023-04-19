@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public class ManageRecipesViewModel implements PropertyChangeListener
 {
   private final Model model;
-  private Person person;
   private final ListProperty<Recipe> recipesList;
   private final StringProperty title;
   private final StringProperty ingredientName;
@@ -68,10 +67,11 @@ public class ManageRecipesViewModel implements PropertyChangeListener
     {
       ArrayList<Ingredient> ingredients = new ArrayList<>();
       ingredients.addAll(ingredientsList);
-      model.addRecipe(title.get(), description.get(), ingredients, new Member("email1", "username1", "password1"));
+      model.addRecipe(title.get(), description.get(), ingredients);
       reset();
     } catch (Exception e)
     {
+      e.printStackTrace();
       this.error.set(e.getMessage());
     }
   }
@@ -82,7 +82,7 @@ public class ManageRecipesViewModel implements PropertyChangeListener
     {
       ArrayList<Ingredient> ingredients = new ArrayList<>();
       ingredients.addAll(ingredientsList);
-      model.editRecipe(recipe.get(), title.get(), description.get(), ingredients, new Member("email1", "username1", "password1"));
+      model.editRecipe(recipe.get(), title.get(), description.get(), ingredients);
       reset();
     } catch (Exception e)
     {
@@ -94,7 +94,7 @@ public class ManageRecipesViewModel implements PropertyChangeListener
   {
     try
     {
-      model.removeRecipe(recipe.get(), new Member("email1", "username1", "password1"));
+      model.removeRecipe(recipe.get());
       reset();
     } catch (Exception e)
     {
@@ -178,12 +178,12 @@ public class ManageRecipesViewModel implements PropertyChangeListener
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
     Platform.runLater(() -> {
-      if (evt.getPropertyName().equals("IngredientAdded"))
+      if (evt.getPropertyName().equals("ResetIngredients"))
       {
         if (!ingredientsList.contains((Ingredient) evt.getNewValue()))
           this.ingredientsList.add((Ingredient) evt.getNewValue());
       }
-      else if (evt.getPropertyName().equals("RecipeAdded") || evt.getPropertyName().equals("RecipeEdited") || evt.getPropertyName().equals("RecipeRemoved"))
+      else if (evt.getPropertyName().equals("ResetRecipes"))
       {
         resetRecipesList();
       }

@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Person
+public abstract class Person implements Serializable
 {
   private final String email;
   private String username;

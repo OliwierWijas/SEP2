@@ -1,133 +1,160 @@
 package model;
 
-import model.validation.EmailValidator;
-import model.validation.PasswordValidator;
-import model.validation.UsernameValidator;
+import client.Client;
+import javafx.application.Platform;
+import shared.Connector;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public class ModelManager implements Model
+public class ModelManager implements Model, PropertyChangeListener
 {
-  private RecipeList recipeList;
-  private PersonList personList;
-  private IngredientList ingredientList;
-  private String username;
+  private final Client client;
   //private final Administrator administrator;
   private final PropertyChangeSupport support;
 
-  public ModelManager()
+  public ModelManager(Connector connector) throws RemoteException
   {
-    this.recipeList = RecipeList.getInstance();
-    this.personList = PersonList.getInstance();
-    this.ingredientList = IngredientList.getInstance();
+    this.client = new Client(connector);
     //this.administrator = Administrator.getInstance();
+    this.client.addPropertyChangeListener(this);
     this.support = new PropertyChangeSupport(this);
   }
 
-  @Override public String createAccount(String email, String username, String password)
+  @Override public void createAccount(String email, String username, String password)
   {
     // check if objects have the same recipes and favourites
-    EmailValidator.validateEmail(email);
-    UsernameValidator.validateUsername(username);
-    PasswordValidator.validatePassword(password);
-
-    Member member = new Member(email, username, password);
-    this.personList.addMember(member);
-    return username;
-  }
-
-  @Override public String login(String username, String password)
-  {
-    if (PersonList.getInstance().login(username, password))
+    try
     {
-      this.username = username;
-      return this.username;
+      this.client.createAccount(email, username, password);
     }
-    throw new IllegalArgumentException("The account does not exist.");
+    catch (Exception e)
+    {
+      throw new IllegalArgumentException(e.getMessage());
+    }
   }
 
-  @Override public void addRecipe(String title, String description, ArrayList<Ingredient> ingredients, Person person)
+  @Override public void login(String username, String password)
   {
-    if (title.isEmpty() || title.equals(""))
-      throw new IllegalArgumentException("Title cannot be empty.");
-    else if (description.isEmpty() || description.equals(""))
-      throw new IllegalArgumentException("Description cannot be empty.");
-    else if (ingredients.isEmpty() || ingredients.size() == 0)
-      throw new IllegalArgumentException("Recipe cannot have 0 ingredients.");
-
-    Recipe recipe = new Recipe(title, description, person.getUsername());
-    recipe.addAllIngredients(ingredients);
-
-    this.recipeList.addRecipe(recipe);
-    this.personList.addRecipeToPerson(recipe, person);
-    this.ingredientList.addAllIngredients(ingredients);
-
-    this.support.firePropertyChange("RecipeAdded", null, recipe);
+    try
+    {
+      this.client.login(username, password);
+    }
+    catch (Exception e)
+    {
+      throw new IllegalArgumentException(e.getMessage());
+    }
   }
 
-  @Override public void editRecipe(Recipe recipe, String title, String description, ArrayList<Ingredient> ingredients, Person person)
+  @Override public void addRecipe(String title, String description, ArrayList<Ingredient> ingredients)
   {
-    if (recipe == null)
-      throw new IllegalArgumentException("No recipe selected.");
-    else if (title.isEmpty() || title.equals(""))
-      throw new IllegalArgumentException("Title cannot be empty.");
-    else if (description.isEmpty() || description.equals(""))
-      throw new IllegalArgumentException("Description cannot be empty.");
-    else if (ingredients.isEmpty() || ingredients.size() == 0)
-      throw new IllegalArgumentException("Recipe cannot have 0 ingredients.");
-
-    this.recipeList.editRecipe(recipe, title, description, ingredients);
-    this.personList.editPersonRecipe(recipe, title, description, ingredients, person);
-    this.ingredientList.addAllIngredients(ingredients);
-
-    this.support.firePropertyChange("RecipeEdited", null, recipe);
+    try
+    {
+      this.client.addRecipe(title, description, ingredients);
+    }
+    catch (Exception e)
+    {
+      throw new IllegalArgumentException(e.getMessage());
+    }
   }
 
-  @Override public void removeRecipe(Recipe recipe, Person person)
+  @Override public void editRecipe(Recipe recipe, String title, String description, ArrayList<Ingredient> ingredients)
   {
-    if (recipe == null)
-      throw new NullPointerException("Recipe not selected");
-
-    this.recipeList.removeRecipe(recipe);
-    this.personList.removeRecipeFromPerson(recipe, person);
-
-    this.support.firePropertyChange("RecipeRemoved", null, recipe);
+    try
+    {
+      this.client.editRecipe(recipe, title, description, ingredients);
+    }
+    catch (Exception e)
+    {
+      throw new IllegalArgumentException(e.getMessage());
+    }
   }
 
-  @Override public void addToFavourites(Recipe recipe, Person person)
+  @Override public void removeRecipe(Recipe recipe)
   {
     if (recipe == null)
       throw new NullPointerException("Recipe not selected");
 
-    this.personList.addToFavourites(recipe, person);
+    try
+    {
+      this.client.removeRecipe(recipe);
+    }
+    catch (Exception e)
+    {
+      throw new IllegalArgumentException(e.getMessage());
+    }
   }
 
-  @Override public void removeFromFavourites(Recipe recipe, Person person)
+  @Override public void addToFavourites(Recipe recipe)
   {
     if (recipe == null)
       throw new NullPointerException("Recipe not selected");
 
-    this.personList.removeFromFavourites(recipe, person);
+    try
+    {
+      this.client.addToFavourites(recipe);
+    }
+    catch (Exception e)
+    {
+      throw new IllegalArgumentException(e.getMessage());
+    }
+  }
+
+  @Override public void removeFromFavourites(Recipe recipe)
+  {
+    if (recipe == null)
+      throw new NullPointerException("Recipe not selected");
+
+    try
+    {
+      this.client.removeFromFavourites(recipe);
+    }
+    catch (Exception e)
+    {
+      throw new IllegalArgumentException(e.getMessage());
+    }
   }
 
   @Override public ArrayList<Ingredient> getAllIngredients()
   {
-    return this.ingredientList.getIngredients();
+    try
+    {
+      return this.client.getAllIngredients();
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
   }
 
   @Override public ArrayList<Recipe> getAllRecipes()
   {
-    return this.recipeList.getRecipes();
+    try
+    {
+      return this.client.getAllRecipes();
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
   }
 
   @Override public void addIngredient(Ingredient ingredient)
   {
     if (ingredient.getName() == null || ingredient.getName().isEmpty())
       throw new IllegalArgumentException("Ingredient's name cannot be empty.");
-    this.ingredientList.addIngredient(ingredient);
-    this.support.firePropertyChange("IngredientAdded", null, ingredient);
+
+    try
+    {
+      this.client.addIngredient(ingredient);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
   }
 
   @Override public void addPropertyChangeListener(PropertyChangeListener listener)
@@ -135,10 +162,13 @@ public class ModelManager implements Model
     this.support.addPropertyChangeListener(listener);
   }
 
-  public static void main(String[] args)
+  @Override public void propertyChange(PropertyChangeEvent evt)
   {
-    ModelManager modelManager = new ModelManager();
-    modelManager.createAccount("email1", "username1", "password1");
-    System.out.println(modelManager.login("username1", "password1"));
+    Platform.runLater(() -> {
+      if (evt.getPropertyName().equals("ResetRecipes"))
+        this.support.firePropertyChange("ResetRecipes", false, true);
+      else if (evt.getPropertyName().equals("ResetIngredients"))
+        this.support.firePropertyChange("ResetIngredients", null, evt.getNewValue());
+    });
   }
 }

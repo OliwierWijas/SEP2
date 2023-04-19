@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Member extends Person
+public class Member extends Person implements Serializable
 {
   private final ArrayList<Recipe> favourites;
 

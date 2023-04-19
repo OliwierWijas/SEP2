@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class SearchRecipesViewModel implements PropertyChangeListener
 {
   private final Model model;
-  private Person person;
   private final ListProperty<Recipe> recipesList;
   private final ObjectProperty<Recipe> recipe;
   private final ListProperty<Ingredient> ingredientList;
@@ -28,7 +27,6 @@ public class SearchRecipesViewModel implements PropertyChangeListener
   public SearchRecipesViewModel(Model model)
   {
     this.model = model;
-    this.person = null;
 
     this.recipesList = new SimpleListProperty<>(FXCollections.observableArrayList());
     this.recipe = new SimpleObjectProperty<>();
@@ -59,8 +57,6 @@ public class SearchRecipesViewModel implements PropertyChangeListener
     }
   }
 
-
-
   public void bindError(StringProperty property)
   {
     property.bind(error);
@@ -74,11 +70,6 @@ public class SearchRecipesViewModel implements PropertyChangeListener
   public void bindRecipeList(ObjectProperty<ObservableList<Recipe>> property)
   {
     property.bind(recipesList);
-  }
-
-  public void bindRecipe()
-  {
-
   }
 
   public void bindIngredientList(ObjectProperty<ObservableList<Ingredient>> property)
@@ -133,11 +124,11 @@ public class SearchRecipesViewModel implements PropertyChangeListener
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
     Platform.runLater(() -> {
-      if (evt.getPropertyName().equals("IngredientAdded"))
+      if (evt.getPropertyName().equals("ResetIngredients"))
       {
         resetIngredientList();
       }
-      else if (evt.getPropertyName().equals("RecipeAdded") || evt.getPropertyName().equals("RecipeEdited") || evt.getPropertyName().equals("RecipeRemoved"))
+      else if (evt.getPropertyName().equals("ResetRecipes"))
       {
         resetRecipesList();
         resetIngredientList();
