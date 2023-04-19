@@ -13,7 +13,8 @@ public class ModelManager implements Model
   private RecipeList recipeList;
   private PersonList personList;
   private IngredientList ingredientList;
-  private final Administrator administrator;
+  private String username;
+  //private final Administrator administrator;
   private final PropertyChangeSupport support;
 
   public ModelManager()
@@ -21,7 +22,7 @@ public class ModelManager implements Model
     this.recipeList = RecipeList.getInstance();
     this.personList = PersonList.getInstance();
     this.ingredientList = IngredientList.getInstance();
-    this.administrator = Administrator.getInstance();
+    //this.administrator = Administrator.getInstance();
     this.support = new PropertyChangeSupport(this);
   }
 
@@ -40,7 +41,10 @@ public class ModelManager implements Model
   @Override public String login(String username, String password)
   {
     if (PersonList.getInstance().login(username, password))
-      return username;
+    {
+      this.username = username;
+      return this.username;
+    }
     throw new IllegalArgumentException("The account does not exist.");
   }
 

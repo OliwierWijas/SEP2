@@ -135,6 +135,8 @@ public class PersonList
       if (members.get(i).getUsername().equals(username) && members.get(i).getPassword().equals(password))
         return true;
     }
+    if (administrator.getUsername().equals(username) && administrator.getPassword().equals(password))
+      return true;
     return false;
   }
 
