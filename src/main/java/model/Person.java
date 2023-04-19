@@ -52,6 +52,19 @@ public abstract class Person
     this.recipes.add(recipe);
   }
 
+  public void editRecipe(Recipe recipe, String title, String description, ArrayList<Ingredient> ingredients)
+  {
+    for (int i = 0; i < recipes.size(); i++)
+    {
+      if (recipes.get(i).equals(recipe))
+      {
+        recipes.get(i).setTitle(title);
+        recipes.get(i).setDescription(description);
+        recipes.get(i).setAllIngredients(ingredients);
+      }
+    }
+  }
+
   public void removeRecipe(Recipe recipe)
   {
     for (int i = 0; i < getRecipes().size(); i++)
@@ -94,15 +107,6 @@ public abstract class Person
     }
 
     Person other = (Person) obj;
-
-    if (this.recipes.size() != other.recipes.size())
-      return false;
-
-    for (int i = 0; i < recipes.size(); i++)
-    {
-      if (!this.recipes.get(i).equals(other.recipes.get(i)))
-        return false;
-    }
 
     return this.email.equals(other.email) && this.username.equals(other.username) && this.password.equals(other.password);
   }

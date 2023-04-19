@@ -26,6 +26,19 @@ public class RecipeList
     this.recipes.add(recipe);
   }
 
+  public void editRecipe(Recipe recipe, String title, String description, ArrayList<Ingredient> ingredients)
+  {
+    for (Recipe value : recipes)
+    {
+      if (value.equals(recipe))
+      {
+        value.setTitle(title);
+        value.setDescription(description);
+        value.setAllIngredients(ingredients);
+      }
+    }
+  }
+
   public void removeRecipe(Recipe recipe)
   {
     for (int i = 0; i < recipes.size(); i++)
@@ -47,9 +60,9 @@ public class RecipeList
   public String toString()
   {
     String temp = "";
-    for (int i = 0; i < recipes.size(); i++)
+    for (Recipe recipe : recipes)
     {
-      temp += recipes.get(i).toString1() + "\n\n";
+      temp += recipe.toString1() + "\n\n";
     }
     return temp;
   }

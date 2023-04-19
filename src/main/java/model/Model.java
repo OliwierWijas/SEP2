@@ -1,15 +1,19 @@
 package model;
 
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 public interface Model
 {
-  Member createAccount(String email, String username, String password);
+  String createAccount(String email, String username, String password);
+  String login(String username, String password);
   void addRecipe(String title, String description, ArrayList<Ingredient> ingredients, Person person);
+  void editRecipe(Recipe recipe, String title, String description, ArrayList<Ingredient> ingredients, Person person);
   void removeRecipe(Recipe recipe, Person person);
   void addToFavourites(Recipe recipe, Person person);
   void removeFromFavourites(Recipe recipe, Person person);
   ArrayList<Ingredient> getAllIngredients();
   ArrayList<Recipe> getAllRecipes();
   void addIngredient(Ingredient ingredient);
+  void addPropertyChangeListener(PropertyChangeListener listener);
 }

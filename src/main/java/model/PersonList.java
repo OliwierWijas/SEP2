@@ -51,6 +51,20 @@ public class PersonList
       throw new IllegalArgumentException("Person is not in the system.");
   }
 
+  public void editPersonRecipe(Recipe recipe, String title, String description, ArrayList<Ingredient> ingredients, Person person)
+  {
+    if (person instanceof Member)
+    {
+      getMember(person).editRecipe(recipe, title, description, ingredients);
+    }
+    else if (person instanceof Administrator)
+    {
+      this.administrator.editRecipe(recipe, title, description, ingredients);
+    }
+    else
+      throw new IllegalArgumentException("Person is not in the system.");
+  }
+
   public void removeRecipeFromPerson(Recipe recipe, Person person)
   {
     if (person instanceof Member)
@@ -112,6 +126,16 @@ public class PersonList
       }
     }
     throw new NullPointerException("Person is not in the system.");
+  }
+
+  public boolean login(String username, String password)
+  {
+    for (int i = 0; i < members.size(); i++)
+    {
+      if (members.get(i).getUsername().equals(username) && members.get(i).getPassword().equals(password))
+        return true;
+    }
+    return false;
   }
 
   public String toString()

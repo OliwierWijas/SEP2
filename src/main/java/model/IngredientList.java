@@ -23,11 +23,32 @@ public class IngredientList
 
   public void addIngredient(Ingredient ingredient)
   {
-    this.ingredients.add(ingredient);
+    if (!exists(ingredient))
+      ingredients.add(ingredient);
+  }
+
+  public void addAllIngredients(ArrayList<Ingredient> ingredients)
+  {
+    for (int i = 0; i < ingredients.size(); i++)
+    {
+      addIngredient(ingredients.get(i));
+    }
   }
 
   public ArrayList<Ingredient> getIngredients()
   {
     return ingredients;
+  }
+
+  private boolean exists(Ingredient ingredient)
+  {
+    for (int i = 0; i < ingredients.size(); i++)
+    {
+      if (ingredients.get(i).equals(ingredient))
+      {
+        return true;
+      }
+    }
+    return false;
   }
 }

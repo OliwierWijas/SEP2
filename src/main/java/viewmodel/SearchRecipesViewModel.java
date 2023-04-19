@@ -1,5 +1,6 @@
 package viewmodel;
 
+import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,13 +9,14 @@ import model.Model;
 import model.Person;
 import model.Recipe;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
-public class SearchRecipesViewModel
+public class SearchRecipesViewModel implements PropertyChangeListener
 {
   private final Model model;
   private Person person;
-  private StringProperty searchRecipe;
   private final ListProperty<Recipe> recipesList;
   private final ObjectProperty<Recipe> recipe;
   private final ListProperty<Ingredient> ingredientList;
@@ -28,7 +30,6 @@ public class SearchRecipesViewModel
     this.model = model;
     this.person = null;
 
-    this.searchRecipe = new SimpleStringProperty("");
     this.recipesList = new SimpleListProperty<>(FXCollections.observableArrayList());
     this.recipe = new SimpleObjectProperty<>();
     this.ingredientList = new SimpleListProperty<>(FXCollections.observableArrayList());
@@ -38,28 +39,7 @@ public class SearchRecipesViewModel
     this.description = new SimpleStringProperty("");
     resetIngredientList();
     resetRecipesList();
-  }
-
-  public void addRecipe()
-  {
-    try
-    {
-      model.addRecipe(title.get(), description.get(), null, person);
-    } catch (Exception e)
-    {
-      this.error.set(e.getMessage());
-    }
-  }
-
-  public void removeRecipe()
-  {
-    try
-    {
-      model.removeRecipe(recipe.get(), person);
-    } catch (Exception e)
-    {
-      error.set(e.getMessage());
-    }
+    this.model.addPropertyChangeListener(this);
   }
 
   public void getRecipeByIngredients()
@@ -79,15 +59,7 @@ public class SearchRecipesViewModel
     }
   }
 
-  public void bindTitle(StringProperty property)
-  {
-    this.title.bindBidirectional(property);
-  }
 
-  public void bindDescription(StringProperty property)
-  {
-    this.description.bindBidirectional(property);
-  }
 
   public void bindError(StringProperty property)
   {
@@ -148,13 +120,28 @@ public class SearchRecipesViewModel
     error.set("");
   }
 
-  public void resetRecipesList()
+  private void resetRecipesList()
   {
     recipesList.setAll(model.getAllRecipes());
   }
 
-  public void resetIngredientList()
+  private void resetIngredientList()
   {
     ingredientList.setAll(model.getAllIngredients());
+  }
+
+  @Override public void propertyChange(PropertyChangeEvent evt)
+  {
+    Platform.runLater(() -> {
+      if (evt.getPropertyName().equals("IngredientAdded"))
+      {
+        resetIngredientList();
+      }
+      else if (evt.getPropertyName().equals("RecipeAdded") || evt.getPropertyName().equals("RecipeEdited") || evt.getPropertyName().equals("RecipeRemoved"))
+      {
+        resetRecipesList();
+        resetIngredientList();
+      }
+    });
   }
 }

@@ -31,6 +31,12 @@ public class Recipe
     this.description = description;
   }
 
+  public void setAllIngredients(ArrayList<Ingredient> ingredients)
+  {
+    this.ingredients.clear();
+    this.ingredients.addAll(ingredients);
+  }
+
   public String getTitle()
   {
     return title;

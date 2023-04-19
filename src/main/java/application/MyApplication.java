@@ -12,7 +12,7 @@ public class MyApplication extends Application
 {
   @Override public void start(Stage primaryStage)
   {
-    Model model = new ModelManager();
+    /*Model model = new ModelManager();
     model.addIngredient(new Ingredient("sriracha"));
     model.addIngredient(new Ingredient("tomato"));
     model.addIngredient(new Ingredient("potato"));
@@ -31,6 +31,6 @@ public class MyApplication extends Application
     model.addRecipe("title2", "description2", ingredients1, member2);
     ViewModelFactory viewModelFactory = new ViewModelFactory(model);
     ViewHandler viewHandler = new ViewHandler(viewModelFactory);
-    viewHandler.start(primaryStage);
+    viewHandler.start(primaryStage);*/
   }
 }

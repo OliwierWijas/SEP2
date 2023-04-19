@@ -40,12 +40,6 @@ public class Member extends Person
 
     Member other = (Member) obj;
 
-    for (int i = 0; i < favourites.size(); i++)
-    {
-      if (!favourites.get(i).equals(other.favourites.get(i)))
-        return false;
-    }
-
     return super.equals(other);
   }
 
