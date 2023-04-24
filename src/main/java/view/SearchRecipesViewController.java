@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
 import model.Ingredient;
+import model.IngredientAdapter;
 import model.Recipe;
 import viewmodel.SearchRecipesViewModel;
 
@@ -17,11 +18,11 @@ public class SearchRecipesViewController implements ViewController
 {
   @FXML private TextField searchRecipeTextField;
   @FXML private TextField searchIngredientTextField;
-  @FXML private TableView<Ingredient> ingredientTable;
-  @FXML private TableColumn<Ingredient, String> nameCell;
-  @FXML private TableColumn<Ingredient, CheckBox> selectCell;
+  @FXML private TableView<IngredientAdapter> ingredientTable;
+  @FXML private TableColumn<IngredientAdapter, String> nameCell;
+  @FXML private TableColumn<IngredientAdapter, CheckBox> selectCell;
   @FXML private ListView<Recipe> recipeListView;
-  private SimpleListProperty<Ingredient> selectedIngredientList;
+  private SimpleListProperty<IngredientAdapter> selectedIngredientList;
 
 
   private ViewHandler viewHandler;

@@ -16,8 +16,8 @@ public class ManageRecipesViewModel implements PropertyChangeListener
   private final ListProperty<Recipe> recipesList;
   private final StringProperty title;
   private final StringProperty ingredientName;
-  private final ListProperty<Ingredient> ingredientsList;
-  private final ObjectProperty<Ingredient> ingredient;
+  private final ListProperty<IngredientAdapter> ingredientsList;
+  private final ObjectProperty<IngredientAdapter> ingredient;
   private final StringProperty description;
   private final ObjectProperty<Recipe> recipe;
   private final StringProperty error;
@@ -44,7 +44,7 @@ public class ManageRecipesViewModel implements PropertyChangeListener
     try
     {
       String name = ingredientName.get().toLowerCase();
-      ingredientsList.add(new Ingredient(name));
+      ingredientsList.add(new IngredientAdapter(new Ingredient(name)));
       ingredientName.set("");
     } catch (Exception e)
     {
@@ -66,7 +66,12 @@ public class ManageRecipesViewModel implements PropertyChangeListener
     try
     {
       ArrayList<Ingredient> ingredients = new ArrayList<>();
-      ingredients.addAll(ingredientsList);
+
+      for (int i = 0; i < ingredientsList.size(); i++)
+      {
+        ingredients.add(ingredientsList.get(i).getSubject());
+      }
+
       model.addRecipe(title.get(), description.get(), ingredients);
       reset();
     } catch (Exception e)
@@ -81,7 +86,12 @@ public class ManageRecipesViewModel implements PropertyChangeListener
     try
     {
       ArrayList<Ingredient> ingredients = new ArrayList<>();
-      ingredients.addAll(ingredientsList);
+
+      for (int i = 0; i < ingredientsList.size(); i++)
+      {
+        ingredients.add(ingredientsList.get(i).getSubject());
+      }
+
       model.editRecipe(recipe.get(), title.get(), description.get(), ingredients);
       reset();
     } catch (Exception e)
@@ -117,12 +127,12 @@ public class ManageRecipesViewModel implements PropertyChangeListener
     this.ingredientName.bindBidirectional(property);
   }
 
-  public void bindIngredientsList(ObjectProperty<ObservableList<Ingredient>> property)
+  public void bindIngredientsList(ObjectProperty<ObservableList<IngredientAdapter>> property)
   {
     property.bind(ingredientsList);
   }
 
-  public void bindIngredient(ReadOnlyObjectProperty<Ingredient> property)
+  public void bindIngredient(ReadOnlyObjectProperty<IngredientAdapter> property)
   {
     this.ingredient.bind(property);
   }
@@ -155,8 +165,14 @@ public class ManageRecipesViewModel implements PropertyChangeListener
 
   public void showRecipe()
   {
+    this.ingredientsList.clear();
     this.title.set(recipe.get().getTitle());
-    this.ingredientsList.setAll(recipe.get().getIngredients());
+
+    for (int i = 0; i < recipe.get().getIngredients().size(); i++)
+    {
+      this.ingredientsList.add(new IngredientAdapter(recipe.get().getIngredients().get(i)));
+    }
+
     this.description.set(recipe.get().getDescription());
   }
 
@@ -181,7 +197,7 @@ public class ManageRecipesViewModel implements PropertyChangeListener
       if (evt.getPropertyName().equals("ResetIngredients"))
       {
         if (!ingredientsList.contains((Ingredient) evt.getNewValue()))
-          this.ingredientsList.add((Ingredient) evt.getNewValue());
+          this.ingredientsList.add(new IngredientAdapter((Ingredient) evt.getNewValue()));
       }
       else if (evt.getPropertyName().equals("ResetRecipes"))
       {

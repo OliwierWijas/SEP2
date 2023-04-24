@@ -4,10 +4,7 @@ import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.Ingredient;
-import model.Model;
-import model.Person;
-import model.Recipe;
+import model.*;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -18,8 +15,8 @@ public class SearchRecipesViewModel implements PropertyChangeListener
   private final Model model;
   private final ListProperty<Recipe> recipesList;
   private final ObjectProperty<Recipe> recipe;
-  private final ListProperty<Ingredient> ingredientList;
-  private final ListProperty<Ingredient> selectedIngredientList;
+  private final ListProperty<IngredientAdapter> ingredientList;
+  private final ListProperty<IngredientAdapter> selectedIngredientList;
   private final StringProperty error;
   private final StringProperty title;
   private final StringProperty description;
@@ -44,15 +41,23 @@ public class SearchRecipesViewModel implements PropertyChangeListener
   {
     if (!selectedIngredientList.isEmpty())
     {
-      ArrayList<Ingredient> ingredientsTemp = new ArrayList<>();
+      ArrayList<IngredientAdapter> ingredientsTemp = new ArrayList<>();
       ingredientsTemp.addAll(selectedIngredientList);
 
-      ArrayList<Recipe> temp = model.getAllRecipes();
+      ArrayList<Ingredient> temp1 = new ArrayList<>();
+
+      ArrayList<Recipe> temp2 = model.getAllRecipes();
       recipesList.clear();
-      for (int i = 0; i < temp.size(); i++)
+
+      for (int i = 0; i < ingredientsTemp.size(); i++)
       {
-        if (temp.get(i).ifRecipeContainsIngredients(ingredientsTemp))
-          recipesList.add(temp.get(i));
+        temp1.add(ingredientsTemp.get(i).getSubject());
+      }
+
+      for (int i = 0; i < temp2.size(); i++)
+      {
+        if (temp2.get(i).ifRecipeContainsIngredients(temp1))
+          recipesList.add(temp2.get(i));
       }
     }
   }
@@ -72,12 +77,12 @@ public class SearchRecipesViewModel implements PropertyChangeListener
     property.bind(recipesList);
   }
 
-  public void bindIngredientList(ObjectProperty<ObservableList<Ingredient>> property)
+  public void bindIngredientList(ObjectProperty<ObservableList<IngredientAdapter>> property)
   {
     property.bind(ingredientList);
   }
 
-  public void bindSelectedIngredientList(SimpleListProperty<Ingredient> property)
+  public void bindSelectedIngredientList(SimpleListProperty<IngredientAdapter> property)
   {
     this.selectedIngredientList.bind(property);
   }
@@ -100,7 +105,7 @@ public class SearchRecipesViewModel implements PropertyChangeListener
     for (int i = 0; i < temp.size(); i++)
     {
       if (temp.get(i).getName().contains(text))
-        ingredientList.add(temp.get(i));
+        ingredientList.add(new IngredientAdapter(temp.get(i)));
     }
   }
 
@@ -118,7 +123,13 @@ public class SearchRecipesViewModel implements PropertyChangeListener
 
   private void resetIngredientList()
   {
-    ingredientList.setAll(model.getAllIngredients());
+    ArrayList<Ingredient> ingredients = model.getAllIngredients();
+    ArrayList<IngredientAdapter> ingredientAdapters = new ArrayList<>();
+    for (int i = 0; i < ingredients.size(); i++)
+    {
+      ingredientAdapters.add(new IngredientAdapter(ingredients.get(i)));
+    }
+    ingredientList.setAll(ingredientAdapters);
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)

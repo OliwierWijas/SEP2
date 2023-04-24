@@ -1,18 +1,16 @@
 package model;
 
-import javafx.scene.control.CheckBox;
-
 import java.io.Serializable;
 
-public class Ingredient implements Serializable
+public class Ingredient implements Serializable, IngredientInterface
 {
   private final String name;
-  private CheckBox select;
+  private final boolean select;
 
   public Ingredient(String name)
   {
     this.name = name;
-    this.select = new CheckBox();
+    this.select = false;
   }
 
   public String getName()
@@ -20,14 +18,9 @@ public class Ingredient implements Serializable
     return name;
   }
 
-  public CheckBox getSelect()
+  public Object getSelect()
   {
     return select;
-  }
-
-  public void setSelect(CheckBox select)
-  {
-    this.select = select;
   }
 
   public String toString()

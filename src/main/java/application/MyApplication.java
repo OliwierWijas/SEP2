@@ -34,6 +34,9 @@ public class MyApplication extends Application
     model.createAccount("email2@via.dk", "username2", "Password2");
     model.addRecipe("title1", "description1", ingredients);
     model.addRecipe("title2", "description2", ingredients1);*/
+    model.addIngredient(new Ingredient("Potato"));
+    model.addIngredient(new Ingredient("Green Beans"));
+    model.addIngredient(new Ingredient("Sriracha"));
 
     ViewModelFactory viewModelFactory = new ViewModelFactory(model);
     ViewHandler viewHandler = new ViewHandler(viewModelFactory);

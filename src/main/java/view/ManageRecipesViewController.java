@@ -10,6 +10,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import model.Ingredient;
+import model.IngredientAdapter;
 import model.Recipe;
 import viewmodel.ManageRecipesViewModel;
 
@@ -19,11 +20,11 @@ public class ManageRecipesViewController implements ViewController
   @FXML private ListView<Recipe> recipeListView;
   @FXML private TextField titleTextField;
   @FXML private TextField ingredientTextField;
-  @FXML private ListView<Ingredient> ingredientListView;
+  @FXML private ListView<IngredientAdapter> ingredientListView;
   @FXML private TextArea descriptionTextArea;
   @FXML private Label error;
 
-  private ReadOnlyObjectProperty<Ingredient> ingredient;
+  private ReadOnlyObjectProperty<IngredientAdapter> ingredient;
   private ReadOnlyObjectProperty<Recipe> recipe;
 
   private ViewHandler viewHandler;
