@@ -1,4 +1,4 @@
-package view;
+package view.admin;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -11,13 +11,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import model.IngredientAdapter;
 import model.Recipe;
+import view.ViewController;
+import view.ViewFactory;
+import view.ViewHandler;
 import viewmodel.ManageRecipesViewModel;
 
-public class ManageRecipesViewController implements ViewController
+public class ManageRecipesAdminViewController implements ViewController
 {
   @FXML private TextField searchRecipeTextField;
   @FXML private ListView<Recipe> recipeListView;
   @FXML private TextField titleTextField;
+  @FXML private TextField authorTextField;
   @FXML private TextField ingredientTextField;
   @FXML private ListView<IngredientAdapter> ingredientListView;
   @FXML private TextArea descriptionTextArea;
@@ -38,6 +42,7 @@ public class ManageRecipesViewController implements ViewController
 
     this.viewModel.bindRecipeList(recipeListView.itemsProperty());
     this.viewModel.bindTitle(titleTextField.textProperty());
+    this.viewModel.bindAuthor(authorTextField.textProperty());
     this.viewModel.bindIngredientName(ingredientTextField.textProperty());
     this.viewModel.bindIngredientsList(ingredientListView.itemsProperty());
 
@@ -77,10 +82,10 @@ public class ManageRecipesViewController implements ViewController
 
   @FXML protected void handleMenu(Event event)
   {
-    if (event.getSource().toString().contains(ViewFactory.MANAGERECIPES))
-      viewHandler.openView(ViewFactory.MANAGERECIPES);
-    else if (event.getSource().toString().contains(ViewFactory.SEARCHMEMBER))
-      viewHandler.openView(ViewFactory.SEARCHMEMBER);
+    if (event.getSource().toString().contains(ViewFactory.MANAGERECIPESMEMBER))
+      viewHandler.openView(ViewFactory.MANAGERECIPESMEMBER);
+    else if (event.getSource().toString().contains(ViewFactory.SEARCHADMIN))
+      viewHandler.openView(ViewFactory.SEARCHADMIN);
   }
 
   @FXML protected void recipeChangeListener()

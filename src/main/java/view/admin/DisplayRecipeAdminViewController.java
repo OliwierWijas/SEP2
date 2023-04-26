@@ -39,8 +39,8 @@ public class DisplayRecipeAdminViewController implements ViewController
 
   @FXML protected void handleMenu(Event event)
   {
-    if (event.getSource().toString().contains(ViewFactory.MANAGERECIPES))
-      viewHandler.openView(ViewFactory.MANAGERECIPES);
+    if (event.getSource().toString().contains(ViewFactory.MANAGERECIPESMEMBER))
+      viewHandler.openView(ViewFactory.MANAGERECIPESMEMBER);
     else if (event.getSource().toString().contains(ViewFactory.SEARCHADMIN))
       viewHandler.openView(ViewFactory.SEARCHADMIN);
   }

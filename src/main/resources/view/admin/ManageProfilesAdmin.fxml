@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.member.ManageRecipesMemberViewController">
+   <children>
+      <ListView fx:id="recipeListView" layoutX="14.0" layoutY="81.0" onMouseClicked="#selectRecipeListener" prefHeight="560.0" prefWidth="972.0" />
+      <TextField fx:id="searchRecipeTextField" layoutX="14.0" layoutY="42.0" onKeyTyped="#recipeChangeListener" prefHeight="26.0" prefWidth="972.0" promptText="Type the username..." />
+      <MenuBar prefHeight="25.0" prefWidth="1000.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Home">
+               <items>
+                  <MenuItem fx:id="SEARCHMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="Search" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Managment">
+               <items>
+                  <MenuItem fx:id="PROFILE" mnemonicParsing="false" onAction="#handleMenu" text="Manage Profiles" />
+                  <MenuItem fx:id="RECIPES" mnemonicParsing="false" onAction="#handleMenu" text="ManageRecepies" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleMenu" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Button layoutX="851.0" layoutY="654.0" mnemonicParsing="false" onAction="#addRecipeButtonPressed" prefHeight="37.0" prefWidth="134.0" text="Remove Membership" />
+      <Label fx:id="error" layoutX="14.0" layoutY="654.0" prefHeight="26.0" prefWidth="613.0" textFill="#cf0e0e" />
+   </children>
+</AnchorPane>

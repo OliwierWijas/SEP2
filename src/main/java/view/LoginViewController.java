@@ -32,7 +32,6 @@ public class LoginViewController implements ViewController
   {
     try
     {
-      System.out.println("weoifnkwejfnkj");
       String username = this.viewModel.login();
       if (username.equals(Administrator.USERNAME))
         viewHandler.openView(ViewFactory.SEARCHADMIN);

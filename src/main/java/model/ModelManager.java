@@ -41,7 +41,8 @@ public class ModelManager implements Model, PropertyChangeListener
   {
     try
     {
-      return this.client.login(username, password);
+      String usernameTemp = this.client.login(username, password);
+      return usernameTemp;
     }
     catch (Exception e)
     {

@@ -10,7 +10,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.member.SearchRecipesMemberViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.admin.SearchRecipesAdminViewController">
    <children>
       <ListView fx:id="recipeListView" layoutX="14.0" layoutY="81.0" onMouseClicked="#displayRecipeListener" prefHeight="600.0" prefWidth="680.0" />
       <TextField fx:id="searchRecipeTextField" layoutX="14.0" layoutY="42.0" onKeyTyped="#recipeChangeListener" prefHeight="25.0" prefWidth="683.0" promptText="Type the title..." />
@@ -18,14 +18,13 @@
         <menus>
           <Menu mnemonicParsing="false" text="Home">
             <items>
-              <MenuItem fx:id="SEARCHMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="Search" />
+              <MenuItem fx:id="SEARCHADMIN" mnemonicParsing="false" onAction="#handleMenu" text="Search" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Profile">
+          <Menu mnemonicParsing="false" text="Management">
             <items>
-                  <MenuItem fx:id="PROFILE" mnemonicParsing="false" onAction="#handleMenu" text="Edit profile" />
-                  <MenuItem fx:id="MANAGERECIPES" mnemonicParsing="false" onAction="#handleMenu" text="My recipes" />
-              <MenuItem fx:id="FAVOURITES" mnemonicParsing="false" onAction="#handleMenu" text="My favourites" />
+                  <MenuItem fx:id="MANAGEPROFILES" mnemonicParsing="false" onAction="#handleMenu" text="Manage Profiles" />
+                  <MenuItem fx:id="MANAGERECIPESADMIN" mnemonicParsing="false" onAction="#handleMenu" text="Manage Recipes" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

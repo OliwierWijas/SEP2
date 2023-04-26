@@ -63,6 +63,18 @@ public class PersonList
   {
     if (username.equals(Administrator.USERNAME))
     {
+      for (int i = 0; i < members.size(); i++)
+      {
+        for (int j = 0; j < members.get(i).getRecipes().size(); j++)
+        {
+          ArrayList<Recipe> temp = members.get(i).getRecipes();
+          if (temp.get(j).equals(recipe))
+          {
+            members.get(i).editRecipe(temp.get(j), title, description, ingredients);
+            return;
+          }
+        }
+      }
       this.administrator.editRecipe(recipe, title, description, ingredients);
     }
     else

@@ -15,6 +15,7 @@ public class ManageRecipesViewModel implements PropertyChangeListener
   private final Model model;
   private final ListProperty<Recipe> recipesList;
   private final StringProperty title;
+  private final StringProperty author;
   private final StringProperty ingredientName;
   private final ListProperty<IngredientAdapter> ingredientsList;
   private final ObjectProperty<IngredientAdapter> ingredient;
@@ -29,6 +30,7 @@ public class ManageRecipesViewModel implements PropertyChangeListener
 
     this.recipesList = new SimpleListProperty<>(FXCollections.observableArrayList());
     this.title = new SimpleStringProperty("");
+    this.author = new SimpleStringProperty("");
     this.ingredientName = new SimpleStringProperty("");
     this.ingredientsList = new SimpleListProperty<>(FXCollections.observableArrayList());
     this.ingredient = new SimpleObjectProperty<>();
@@ -122,6 +124,11 @@ public class ManageRecipesViewModel implements PropertyChangeListener
     this.title.bindBidirectional(property);
   }
 
+  public void bindAuthor(StringProperty property)
+  {
+    property.bind(author);
+  }
+
   public void bindIngredientName(StringProperty property)
   {
     this.ingredientName.bindBidirectional(property);
@@ -176,6 +183,7 @@ public class ManageRecipesViewModel implements PropertyChangeListener
     }
 
     this.description.set(recipe.get().getDescription());
+    this.author.set(recipe.get().getUsername());
   }
 
   public void reset()

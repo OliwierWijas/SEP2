@@ -10,20 +10,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.member.DisplayRecipeMemberViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.admin.DisplayRecipeAdminViewController">
    <children>
       <MenuBar prefHeight="25.0" prefWidth="1000.0">
          <menus>
             <Menu mnemonicParsing="false" text="Home">
                <items>
-                  <MenuItem fx:id="SEARCH" mnemonicParsing="false" onAction="#handleMenu" text="Search" />
+                  <MenuItem fx:id="SEARCHADMIN" mnemonicParsing="false" onAction="#handleMenu" text="Search" />
                </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Profile">
+            <Menu mnemonicParsing="false" text="Management">
                <items>
-                  <MenuItem fx:id="PROFILE" mnemonicParsing="false" onAction="#handleMenu" text="Edit profile" />
-                  <MenuItem fx:id="MANAGERECIPES" mnemonicParsing="false" onAction="#handleMenu" text="My recipes" />
-                  <MenuItem fx:id="FAVOURITES" mnemonicParsing="false" onAction="#handleMenu" text="My favourites" />
+                  <MenuItem fx:id="MANAGEPROFILES" mnemonicParsing="false" onAction="#handleMenu" text="Manage Profiles" />
+                  <MenuItem fx:id="MANAGERECIPESADMIN" mnemonicParsing="false" onAction="#handleMenu" text="Manage Recipes" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
@@ -55,7 +54,6 @@
          </font>
       </Label>
       <TextArea fx:id="description" editable="false" focusTraversable="false" layoutX="400.0" layoutY="163.0" prefHeight="479.0" prefWidth="578.0" />
-      <Button layoutX="774.0" layoutY="654.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="129.0" text="Add to Favourites" />
       <Button layoutX="915.0" layoutY="654.0" mnemonicParsing="false" onAction="#goBackButtonPressed" prefHeight="30.0" prefWidth="62.0" text="Back" />
       <Label fx:id="error" layoutX="400.0" layoutY="660.0" textFill="RED" />
    </children>
