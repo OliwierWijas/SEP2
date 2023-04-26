@@ -20,20 +20,6 @@ public class MyApplication extends Application
     Registry registry = LocateRegistry.getRegistry(1099);
     Connector connector = (Connector) registry.lookup("rmiServer");
     Model model = new ModelManager(connector);
-    /*model.addIngredient(new Ingredient("sriracha"));
-    model.addIngredient(new Ingredient("tomato"));
-    model.addIngredient(new Ingredient("potato"));
-    model.addIngredient(new Ingredient("green beans"));
-    ArrayList<Ingredient> ingredients = new ArrayList<>();
-    ArrayList<Ingredient> ingredients1 = new ArrayList<>();
-    ingredients.add(new Ingredient("potato"));
-    ingredients.add(new Ingredient("tomato"));
-    ingredients1.add(new Ingredient("potato"));
-    ingredients1.add(new Ingredient("green beans"));
-    model.createAccount("email@via.dk", "username1", "Password1");
-    model.createAccount("email2@via.dk", "username2", "Password2");
-    model.addRecipe("title1", "description1", ingredients);
-    model.addRecipe("title2", "description2", ingredients1);*/
     model.addIngredient(new Ingredient("Potato"));
     model.addIngredient(new Ingredient("Green Beans"));
     model.addIngredient(new Ingredient("Sriracha"));

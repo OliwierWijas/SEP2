@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class PersonList
 {
-  private final static String ADMIN = "admin";
   private static PersonList instance;
   private final ArrayList<Member> members;
   private final Administrator administrator;
@@ -50,7 +49,7 @@ public class PersonList
 
   public void addRecipeToPerson(Recipe recipe, String username)
   {
-    if (username.equals(ADMIN))
+    if (username.equals(Administrator.USERNAME))
     {
       this.administrator.addRecipe(recipe);
     }
@@ -62,7 +61,7 @@ public class PersonList
 
   public void editPersonRecipe(Recipe recipe, String title, String description, ArrayList<Ingredient> ingredients, String username)
   {
-    if (username.equals(ADMIN))
+    if (username.equals(Administrator.USERNAME))
     {
       this.administrator.editRecipe(recipe, title, description, ingredients);
     }
@@ -74,7 +73,7 @@ public class PersonList
 
   public void removeRecipeFromPerson(Recipe recipe, String username)
   {
-    if (username.equals(ADMIN))
+    if (username.equals(Administrator.USERNAME))
     {
       for (int i = 0; i < members.size(); i++)
       {
@@ -99,7 +98,7 @@ public class PersonList
 
   public void addToFavourites(Recipe recipe, String username)
   {
-    if (username.equals(ADMIN))
+    if (username.equals(Administrator.USERNAME))
     {
       throw new IllegalArgumentException("Administrator is not allowed to add a recipe to favourites.");
 
@@ -110,7 +109,7 @@ public class PersonList
 
   public void removeFromFavourites(Recipe recipe, String username)
   {
-    if (username.equals(ADMIN))
+    if (username.equals(Administrator.USERNAME))
     {
       throw new IllegalArgumentException("Administrator is not allowed to remove a recipe to favourites.");
 

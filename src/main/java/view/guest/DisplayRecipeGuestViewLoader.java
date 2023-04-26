@@ -1,7 +1,10 @@
-package view;
+package view.guest;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Region;
+import view.ViewController;
+import view.ViewHandler;
+import view.ViewLoader;
 import viewmodel.ViewModelFactory;
 
 public class DisplayRecipeGuestViewLoader extends ViewLoader

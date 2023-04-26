@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Administrator extends Person implements Serializable
 {
-  private static final String USERNAME = "Administrator";
+  public static final String USERNAME = "Administrator";
   private static Administrator instance;
 
   private Administrator(String email, String password)

@@ -38,11 +38,12 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
     }
   }
 
-  public void login(String username, String password) throws RemoteException
+  public String login(String username, String password) throws RemoteException
   {
     try
     {
       this.username = connector.login(username, password);
+      return username;
     }
     catch (Exception e)
     {

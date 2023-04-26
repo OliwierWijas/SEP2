@@ -1,18 +1,23 @@
-package view;
+package view.member;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
 import model.IngredientAdapter;
 import model.Recipe;
+import view.ViewController;
+import view.ViewFactory;
+import view.ViewHandler;
 import viewmodel.SearchRecipesViewModel;
 
-public class SearchRecipesGuestViewController implements ViewController
+
+public class SearchRecipesMemberViewController implements ViewController
 {
   @FXML private TextField searchRecipeTextField;
   @FXML private TextField searchIngredientTextField;
@@ -53,9 +58,12 @@ public class SearchRecipesGuestViewController implements ViewController
     viewModel.getRecipeByIngredients();
   }
 
-  @FXML protected void goBackButtonPressed()
+  @FXML protected void handleMenu(Event event)
   {
-    viewHandler.openView(ViewFactory.LOGIN);
+    if (event.getSource().toString().contains(ViewFactory.MANAGERECIPES))
+      viewHandler.openView(ViewFactory.MANAGERECIPES);
+    else if (event.getSource().toString().contains(ViewFactory.SEARCHMEMBER))
+      viewHandler.openView(ViewFactory.SEARCHMEMBER);
   }
 
   @FXML protected void recipeChangeListener()
@@ -68,7 +76,7 @@ public class SearchRecipesGuestViewController implements ViewController
     if (recipe.get() != null)
     {
       viewModel.displayRecipe();
-      viewHandler.openView(ViewFactory.DISPLAYRECIPEGUEST);
+      viewHandler.openView(ViewFactory.DISPLAYRECIPEMEMBER);
     }
   }
 

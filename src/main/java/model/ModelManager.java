@@ -37,11 +37,11 @@ public class ModelManager implements Model, PropertyChangeListener
     }
   }
 
-  @Override public void login(String username, String password)
+  @Override public String login(String username, String password)
   {
     try
     {
-      this.client.login(username, password);
+      return this.client.login(username, password);
     }
     catch (Exception e)
     {

@@ -1,14 +1,18 @@
-package view;
+package view.member;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import model.IngredientAdapter;
+import view.ViewController;
+import view.ViewFactory;
+import view.ViewHandler;
 import viewmodel.DisplayRecipeViewModel;
+import javafx.scene.control.*;
 
-public class DisplayRecipeGuestViewController implements ViewController
+
+public class DisplayRecipeMemberViewController implements ViewController
 {
   @FXML private Label title;
   @FXML private Label author;
@@ -33,10 +37,18 @@ public class DisplayRecipeGuestViewController implements ViewController
     this.viewModel.bindError(error.textProperty());
   }
 
+  @FXML protected void handleMenu(Event event)
+  {
+    if (event.getSource().toString().contains(ViewFactory.MANAGERECIPES))
+      viewHandler.openView(ViewFactory.MANAGERECIPES);
+    else if (event.getSource().toString().contains(ViewFactory.SEARCHMEMBER))
+      viewHandler.openView(ViewFactory.SEARCHMEMBER);
+  }
+
   @FXML protected void goBackButtonPressed()
   {
     reset();
-    viewHandler.openView(ViewFactory.SEARCHGUEST);
+    viewHandler.openView(ViewFactory.SEARCHMEMBER);
   }
 
   @Override public void reset()

@@ -1,4 +1,4 @@
-package view;
+package view.admin;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -11,10 +11,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
 import model.IngredientAdapter;
 import model.Recipe;
+import view.ViewController;
+import view.ViewFactory;
+import view.ViewHandler;
 import viewmodel.SearchRecipesViewModel;
 
-
-public class SearchRecipesMemberViewController implements ViewController
+public class SearchRecipesAdminViewController implements ViewController
 {
   @FXML private TextField searchRecipeTextField;
   @FXML private TextField searchIngredientTextField;
@@ -57,10 +59,10 @@ public class SearchRecipesMemberViewController implements ViewController
 
   @FXML protected void handleMenu(Event event)
   {
-    if (event.getSource().toString().contains(ViewFactory.RECIPES))
-      viewHandler.openView(ViewFactory.RECIPES);
-    else if (event.getSource().toString().contains(ViewFactory.SEARCHMEMBER))
-      viewHandler.openView(ViewFactory.SEARCHMEMBER);
+    if (event.getSource().toString().contains(ViewFactory.MANAGERECIPES))
+      viewHandler.openView(ViewFactory.MANAGERECIPES);
+    else if (event.getSource().toString().contains(ViewFactory.SEARCHADMIN))
+      viewHandler.openView(ViewFactory.SEARCHADMIN);
   }
 
   @FXML protected void recipeChangeListener()
@@ -73,7 +75,7 @@ public class SearchRecipesMemberViewController implements ViewController
     if (recipe.get() != null)
     {
       viewModel.displayRecipe();
-      viewHandler.openView(ViewFactory.DISPLAYRECIPEMEMBER);
+      viewHandler.openView(ViewFactory.DISPLAYRECIPEADMIN);
     }
   }
 

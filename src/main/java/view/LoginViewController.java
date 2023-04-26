@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import model.Administrator;
 import viewmodel.LoginViewModel;
 
 public class LoginViewController implements ViewController
@@ -31,8 +32,12 @@ public class LoginViewController implements ViewController
   {
     try
     {
-      this.viewModel.login();
-      viewHandler.openView(ViewFactory.SEARCHMEMBER);
+      System.out.println("weoifnkwejfnkj");
+      String username = this.viewModel.login();
+      if (username.equals(Administrator.USERNAME))
+        viewHandler.openView(ViewFactory.SEARCHADMIN);
+      else
+        viewHandler.openView(ViewFactory.SEARCHMEMBER);
     }
     catch (Exception e)
     {

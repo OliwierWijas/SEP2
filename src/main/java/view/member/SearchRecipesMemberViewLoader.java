@@ -1,7 +1,10 @@
-package view;
+package view.member;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Region;
+import view.ViewController;
+import view.ViewHandler;
+import view.ViewLoader;
 import viewmodel.ViewModelFactory;
 
 public class SearchRecipesMemberViewLoader extends ViewLoader

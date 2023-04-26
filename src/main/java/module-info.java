@@ -12,4 +12,7 @@ module com.example.sep2 {
   opens view to javafx.fxml;
   exports application;
   exports model;
+  opens view.guest to javafx.fxml;
+  opens view.member to javafx.fxml;
+  opens view.admin to javafx.fxml;
 }

@@ -19,13 +19,14 @@ public class LoginViewModel
     this.error = new SimpleStringProperty("");
   }
 
-  public void login()
+  public String login()
   {
     try
     {
-      model.login(username.get(), password.get());
+      String usernameTemp = model.login(username.get(), password.get());
       reset();
       this.error.set("");
+      return usernameTemp;
     }
     catch (Exception e)
     {
