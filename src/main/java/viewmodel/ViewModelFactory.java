@@ -8,6 +8,7 @@ public class ViewModelFactory
   private final ManageRecipesViewModel manageRecipesViewModel;
   private final LoginViewModel loginViewModel;
   private final CreateAccountViewModel createAccountViewModel;
+  private final DisplayRecipeViewModel displayRecipeViewModel;
 
   public ViewModelFactory(Model model)
   {
@@ -15,6 +16,9 @@ public class ViewModelFactory
     this.manageRecipesViewModel = new ManageRecipesViewModel(model);
     this.loginViewModel = new LoginViewModel(model);
     this.createAccountViewModel = new CreateAccountViewModel(model);
+    this.displayRecipeViewModel = new DisplayRecipeViewModel(model);
+    this.searchRecipesViewModel.addPropertyChangeListener(this.displayRecipeViewModel);
+
   }
 
   public SearchRecipesViewModel getSearchRecipesViewModel()
@@ -35,5 +39,10 @@ public class ViewModelFactory
   public CreateAccountViewModel getCreateAccountViewModel()
   {
     return createAccountViewModel;
+  }
+
+  public DisplayRecipeViewModel getDisplayRecipeViewModel()
+  {
+    return displayRecipeViewModel;
   }
 }

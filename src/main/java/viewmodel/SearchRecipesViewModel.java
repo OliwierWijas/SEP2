@@ -8,10 +8,12 @@ import model.*;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
 public class SearchRecipesViewModel implements PropertyChangeListener
 {
+  public final static String RECIPESELECTED = "RECIPESELECTED";
   private final Model model;
   private final ListProperty<Recipe> recipesList;
   private final ObjectProperty<Recipe> recipe;
@@ -20,6 +22,7 @@ public class SearchRecipesViewModel implements PropertyChangeListener
   private final StringProperty error;
   private final StringProperty title;
   private final StringProperty description;
+  private final PropertyChangeSupport support;
 
   public SearchRecipesViewModel(Model model)
   {
@@ -35,6 +38,7 @@ public class SearchRecipesViewModel implements PropertyChangeListener
     resetIngredientList();
     resetRecipesList();
     this.model.addPropertyChangeListener(this);
+    this.support = new PropertyChangeSupport(this);
   }
 
   public void getRecipeByIngredients()
@@ -60,6 +64,11 @@ public class SearchRecipesViewModel implements PropertyChangeListener
           recipesList.add(temp2.get(i));
       }
     }
+  }
+
+  public void displayRecipe()
+  {
+    this.support.firePropertyChange(RECIPESELECTED, null, recipe.get());
   }
 
   public void bindError(StringProperty property)
@@ -130,6 +139,11 @@ public class SearchRecipesViewModel implements PropertyChangeListener
       ingredientAdapters.add(new IngredientAdapter(ingredients.get(i)));
     }
     ingredientList.setAll(ingredientAdapters);
+  }
+
+  public void addPropertyChangeListener(PropertyChangeListener listener)
+  {
+    this.support.addPropertyChangeListener(listener);
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)

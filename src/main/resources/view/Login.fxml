@@ -30,7 +30,7 @@
       <Label layoutX="157.0" layoutY="263.0" text="OR" textFill="#868484" />
       <Line endX="3.3999786376953125" layoutX="147.0" layoutY="272.0" startX="-100.0" stroke="#898888" />
       <Button layoutX="46.0" layoutY="296.0" mnemonicParsing="false" onAction="#signUpButtonPressed" prefHeight="26.0" prefWidth="236.0" text="Sign Up" />
-      <Button layoutX="46.0" layoutY="340.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="236.0" text="Continue as a Guest" />
+      <Button layoutX="46.0" layoutY="340.0" mnemonicParsing="false" onAction="#continueAsGuestButtonPressed" prefHeight="26.0" prefWidth="236.0" text="Continue as a Guest" />
       <Line endX="3.3999786376953125" layoutX="279.0" layoutY="272.0" startX="-100.0" stroke="#898888" />
       <Label fx:id="error" layoutX="48.0" layoutY="194.0" prefHeight="18.0" prefWidth="236.0" textFill="#f40000" />
       <PasswordField fx:id="passwordTextField" layoutX="47.0" layoutY="163.0" prefHeight="26.0" prefWidth="236.0" />

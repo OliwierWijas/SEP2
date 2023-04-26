@@ -18,7 +18,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Home">
             <items>
-              <MenuItem fx:id="SEARCH" mnemonicParsing="false" onAction="#handleMenu" text="Search" />
+              <MenuItem fx:id="SEARCHMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="Search" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Profile">
@@ -37,7 +37,7 @@
       </MenuBar>
       <TextField fx:id="titleTextField" layoutX="425.0" layoutY="41.0" prefHeight="26.0" prefWidth="560.0" promptText="Title" />
       <TextArea fx:id="descriptionTextArea" layoutX="425.0" layoutY="361.0" prefHeight="284.0" prefWidth="560.0" promptText="Description" />
-      <ListView fx:id="ingredientListView" layoutX="425.0" layoutY="114.0" prefHeight="207.0" prefWidth="560.0" />
+      <ListView fx:id="ingredientListView" focusTraversable="false" layoutX="425.0" layoutY="114.0" prefHeight="207.0" prefWidth="560.0" />
       <TextField fx:id="ingredientTextField" layoutX="425.0" layoutY="81.0" prefHeight="26.0" prefWidth="474.0" promptText="Ingredient" />
       <Button layoutX="905.0" layoutY="81.0" mnemonicParsing="false" onAction="#addIngredientButtonPressed" prefHeight="26.0" prefWidth="80.0" text="Add" />
       <Button layoutX="905.0" layoutY="654.0" mnemonicParsing="false" onAction="#addRecipeButtonPressed" prefHeight="26.0" prefWidth="80.0" text="Add" />

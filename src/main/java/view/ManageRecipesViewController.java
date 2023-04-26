@@ -9,7 +9,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
-import model.Ingredient;
 import model.IngredientAdapter;
 import model.Recipe;
 import viewmodel.ManageRecipesViewModel;
@@ -80,8 +79,8 @@ public class ManageRecipesViewController implements ViewController
   {
     if (event.getSource().toString().contains(ViewFactory.RECIPES))
       viewHandler.openView(ViewFactory.RECIPES);
-    else if (event.getSource().toString().contains(ViewFactory.SEARCH))
-      viewHandler.openView(ViewFactory.SEARCH);
+    else if (event.getSource().toString().contains(ViewFactory.SEARCHMEMBER))
+      viewHandler.openView(ViewFactory.SEARCHMEMBER);
   }
 
   @FXML protected void recipeChangeListener()

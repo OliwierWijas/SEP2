@@ -1,20 +1,18 @@
 package view;
 
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
-import model.Ingredient;
 import model.IngredientAdapter;
 import model.Recipe;
 import viewmodel.SearchRecipesViewModel;
 
-
-public class SearchRecipesViewController implements ViewController
+public class SearchRecipesGuestViewController implements ViewController
 {
   @FXML private TextField searchRecipeTextField;
   @FXML private TextField searchIngredientTextField;
@@ -23,7 +21,7 @@ public class SearchRecipesViewController implements ViewController
   @FXML private TableColumn<IngredientAdapter, CheckBox> selectCell;
   @FXML private ListView<Recipe> recipeListView;
   private SimpleListProperty<IngredientAdapter> selectedIngredientList;
-
+  private ReadOnlyObjectProperty<Recipe> recipe;
 
   private ViewHandler viewHandler;
   private SearchRecipesViewModel viewModel;
@@ -40,6 +38,8 @@ public class SearchRecipesViewController implements ViewController
     this.viewModel.bindRecipeList(recipeListView.itemsProperty());
     this.viewModel.bindIngredientList(ingredientTable.itemsProperty());
     this.viewModel.bindSelectedIngredientList(selectedIngredientList);
+    this.recipe = recipeListView.getSelectionModel().selectedItemProperty();
+    this.viewModel.bindRecipe(recipe);
   }
 
   @FXML protected void selectButtonPressed()
@@ -53,17 +53,23 @@ public class SearchRecipesViewController implements ViewController
     viewModel.getRecipeByIngredients();
   }
 
-  @FXML protected void handleMenu(Event event)
+  @FXML protected void goBackButtonPressed()
   {
-    if (event.getSource().toString().contains(ViewFactory.RECIPES))
-      viewHandler.openView(ViewFactory.RECIPES);
-    else if (event.getSource().toString().contains(ViewFactory.SEARCH))
-      viewHandler.openView(ViewFactory.SEARCH);
+    viewHandler.openView(ViewFactory.LOGIN);
   }
 
   @FXML protected void recipeChangeListener()
   {
     searchRecipeTextField.textProperty().addListener((ChangeListener) (observable, oldValue, newValue) -> viewModel.containRecipe(searchRecipeTextField.getText()));
+  }
+
+  @FXML protected void displayRecipeListener()
+  {
+    if (recipe.get() != null)
+    {
+      viewModel.displayRecipe();
+      viewHandler.openView(ViewFactory.DISPLAYRECIPEGUEST);
+    }
   }
 
   @FXML protected void ingredientChangeListener()

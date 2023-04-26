@@ -10,15 +10,15 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SearchRecipesViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SearchRecipesMemberViewController">
    <children>
-      <ListView fx:id="recipeListView" layoutX="14.0" layoutY="81.0" prefHeight="600.0" prefWidth="680.0" />
+      <ListView fx:id="recipeListView" layoutX="14.0" layoutY="81.0" onMouseClicked="#displayRecipeListener" prefHeight="600.0" prefWidth="680.0" />
       <TextField fx:id="searchRecipeTextField" layoutX="14.0" layoutY="42.0" onKeyTyped="#recipeChangeListener" prefHeight="25.0" prefWidth="683.0" promptText="Type the title..." />
       <MenuBar prefHeight="25.0" prefWidth="1000.0">
         <menus>
           <Menu mnemonicParsing="false" text="Home">
             <items>
-              <MenuItem fx:id="SEARCH" mnemonicParsing="false" onAction="#handleMenu" text="Search" />
+              <MenuItem fx:id="SEARCHMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="Search" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Profile">

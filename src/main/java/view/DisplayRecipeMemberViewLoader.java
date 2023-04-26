@@ -4,12 +4,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Region;
 import viewmodel.ViewModelFactory;
 
-public class SearchRecipesViewLoader extends ViewLoader
+public class DisplayRecipeMemberViewLoader extends ViewLoader
 {
   private final ViewHandler viewHandler;
   private final ViewModelFactory viewModelFactory;
 
-  public SearchRecipesViewLoader(String fxmlFile, ViewHandler viewHandler, ViewModelFactory viewModelFactory)
+  public DisplayRecipeMemberViewLoader(String fxmlFile, ViewHandler viewHandler, ViewModelFactory viewModelFactory)
   {
     super(fxmlFile);
     this.viewHandler = viewHandler;
@@ -18,8 +18,8 @@ public class SearchRecipesViewLoader extends ViewLoader
 
   @Override protected ViewController createViewController(FXMLLoader loader, Region root)
   {
-    SearchRecipesViewController searchRecipesViewController = loader.getController();
-    searchRecipesViewController.init(viewHandler, viewModelFactory.getSearchRecipesViewModel(), root);
-    return searchRecipesViewController;
+    DisplayRecipeMemberViewController displayRecipeViewController = loader.getController();
+    displayRecipeViewController.init(viewHandler, viewModelFactory.getDisplayRecipeViewModel(), root);
+    return displayRecipeViewController;
   }
 }

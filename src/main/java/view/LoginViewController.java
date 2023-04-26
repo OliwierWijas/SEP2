@@ -32,7 +32,7 @@ public class LoginViewController implements ViewController
     try
     {
       this.viewModel.login();
-      viewHandler.openView(ViewFactory.SEARCH);
+      viewHandler.openView(ViewFactory.SEARCHMEMBER);
     }
     catch (Exception e)
     {
@@ -43,6 +43,11 @@ public class LoginViewController implements ViewController
   @FXML protected void signUpButtonPressed()
   {
     viewHandler.openView(ViewFactory.SIGNUP);
+  }
+
+  @FXML protected void continueAsGuestButtonPressed()
+  {
+    viewHandler.openView(ViewFactory.SEARCHGUEST);
   }
 
   @Override public void reset()

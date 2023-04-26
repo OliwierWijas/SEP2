@@ -36,12 +36,17 @@ public class CreateAccountViewController implements ViewController
     try
     {
       this.viewModel.createAccount();
-      viewHandler.openView(ViewFactory.SEARCH);
+      viewHandler.openView(ViewFactory.SEARCHMEMBER);
     }
     catch (Exception e)
     {
       reset();
     }
+  }
+
+  @FXML protected void continueAsGuestButtonPressed()
+  {
+    viewHandler.openView(ViewFactory.SEARCHGUEST);
   }
 
   @Override public void reset()

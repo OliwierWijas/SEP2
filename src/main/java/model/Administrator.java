@@ -16,7 +16,7 @@ public class Administrator extends Person implements Serializable
   {
     if (instance == null)
     {
-      instance = new Administrator("admin", "admin");
+      instance = new Administrator("admin@via.dk", "Administrator123");
     }
     return instance;
   }

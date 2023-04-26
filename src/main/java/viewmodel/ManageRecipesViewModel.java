@@ -154,6 +154,8 @@ public class ManageRecipesViewModel implements PropertyChangeListener
 
   public void containRecipe(String text)
   {
+    // model.getRecipesByUsername();
+    // we have username in the client class
     ArrayList<Recipe> temp = model.getAllRecipes();
     recipesList.clear();
     for (int i = 0; i < temp.size(); i++)
@@ -188,6 +190,8 @@ public class ManageRecipesViewModel implements PropertyChangeListener
   private void resetRecipesList()
   {
     // it should display recipes made by the user
+    // model.getRecipesByUsername();
+    // we have username in the client class
     recipesList.setAll(model.getAllRecipes());
   }
 
