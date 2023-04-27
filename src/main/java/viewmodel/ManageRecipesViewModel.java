@@ -78,7 +78,6 @@ public class ManageRecipesViewModel implements PropertyChangeListener
       reset();
     } catch (Exception e)
     {
-      e.printStackTrace();
       this.error.set(e.getMessage());
     }
   }

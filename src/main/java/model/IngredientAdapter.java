@@ -35,6 +35,12 @@ public class IngredientAdapter implements IngredientInterface
 
   public boolean equals(Object obj)
   {
-    return subject.equals(obj);
+    if (obj == null || obj.getClass() != getClass())
+    {
+      return false;
+    }
+
+    IngredientAdapter other = (IngredientAdapter) obj;
+    return getName().equals(other.getName());
   }
 }

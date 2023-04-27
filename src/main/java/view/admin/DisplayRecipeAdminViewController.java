@@ -39,8 +39,8 @@ public class DisplayRecipeAdminViewController implements ViewController
 
   @FXML protected void handleMenu(Event event)
   {
-    if (event.getSource().toString().contains(ViewFactory.MANAGERECIPESMEMBER))
-      viewHandler.openView(ViewFactory.MANAGERECIPESMEMBER);
+    if (event.getSource().toString().contains(ViewFactory.MANAGERECIPESADMIN))
+      viewHandler.openView(ViewFactory.MANAGERECIPESADMIN);
     else if (event.getSource().toString().contains(ViewFactory.SEARCHADMIN))
       viewHandler.openView(ViewFactory.SEARCHADMIN);
   }
@@ -48,7 +48,7 @@ public class DisplayRecipeAdminViewController implements ViewController
   @FXML protected void goBackButtonPressed()
   {
     reset();
-    viewHandler.openView(ViewFactory.SEARCHMEMBER);
+    viewHandler.openView(ViewFactory.SEARCHADMIN);
   }
 
   @Override public void reset()
