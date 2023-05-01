@@ -173,16 +173,19 @@ public class ManageRecipesViewModel implements PropertyChangeListener
 
   public void showRecipe()
   {
-    this.ingredientsList.clear();
-    this.title.set(recipe.get().getTitle());
-
-    for (int i = 0; i < recipe.get().getIngredients().size(); i++)
+    if (recipe.get() != null)
     {
-      this.ingredientsList.add(new IngredientAdapter(recipe.get().getIngredients().get(i)));
-    }
+      this.ingredientsList.clear();
+      this.title.set(recipe.get().getTitle());
 
-    this.description.set(recipe.get().getDescription());
-    this.author.set(recipe.get().getUsername());
+      for (int i = 0; i < recipe.get().getIngredients().size(); i++)
+      {
+        this.ingredientsList.add(new IngredientAdapter(recipe.get().getIngredients().get(i)));
+      }
+
+      this.description.set(recipe.get().getDescription());
+      this.author.set(recipe.get().getUsername());
+    }
   }
 
   public void reset()
