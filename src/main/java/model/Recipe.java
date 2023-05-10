@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Recipe implements Serializable
 {
+  private int id;
   private String title;
   private String description;
   private final ArrayList<Ingredient> ingredients;
@@ -14,12 +15,18 @@ public class Recipe implements Serializable
 
   public Recipe(String title, String description, String username)
   {
+    this.id = -1;
     this.title = title;
     this.description = description;
     this.ingredients = new ArrayList<>();
     this.username = username;
     this.sum = 0;
     this.numberOfRatings = 0;
+  }
+
+  public void setId(int id)
+  {
+    this.id = id;
   }
 
   public void setTitle(String title)
@@ -36,6 +43,11 @@ public class Recipe implements Serializable
   {
     this.ingredients.clear();
     this.ingredients.addAll(ingredients);
+  }
+
+  public int getId()
+  {
+    return id;
   }
 
   public String getTitle()

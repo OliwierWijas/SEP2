@@ -113,7 +113,6 @@ public class PersonList
     if (username.equals(Administrator.USERNAME))
     {
       throw new IllegalArgumentException("Administrator is not allowed to add a recipe to favourites.");
-
     }
     else
       getMemberByUsername(username).addFavourite(recipe);
@@ -128,7 +127,6 @@ public class PersonList
     }
     else
       getMemberByUsername(username).removeFavourite(recipe);
-
   }
 
   private Member getMemberByUsername(String username)
