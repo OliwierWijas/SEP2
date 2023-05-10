@@ -37,7 +37,6 @@ public class ManageRecipesViewModel implements PropertyChangeListener
     this.description = new SimpleStringProperty("");
     this.recipe = new SimpleObjectProperty<>();
     this.error = new SimpleStringProperty("");
-    resetRecipesList();
     this.model.addPropertyChangeListener(this);
   }
 
@@ -116,6 +115,7 @@ public class ManageRecipesViewModel implements PropertyChangeListener
   public void bindRecipeList(ObjectProperty<ObservableList<Recipe>> property)
   {
     property.bind(recipesList);
+    resetRecipesList();
   }
 
   public void bindTitle(StringProperty property)
@@ -160,9 +160,7 @@ public class ManageRecipesViewModel implements PropertyChangeListener
 
   public void containRecipe(String text)
   {
-    // model.getRecipesByUsername();
-    // we have username in the client class
-    ArrayList<Recipe> temp = model.getAllRecipes();
+    ArrayList<Recipe> temp = model.getPersonRecipesCopy();
     recipesList.clear();
     for (int i = 0; i < temp.size(); i++)
     {
@@ -199,10 +197,7 @@ public class ManageRecipesViewModel implements PropertyChangeListener
 
   private void resetRecipesList()
   {
-    // it should display recipes made by the user
-    // model.getRecipesByUsername();
-    // we have username in the client class
-    recipesList.setAll(model.getAllRecipes());
+    recipesList.setAll(model.getRecipesByUsername());
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)

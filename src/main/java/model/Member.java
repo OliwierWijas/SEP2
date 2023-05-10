@@ -13,7 +13,7 @@ public class Member extends Person implements Serializable
     this.favourites = new ArrayList<>();
   }
 
-  public void addFavourite(Recipe recipe)
+  /*public void addFavourite(Recipe recipe)
   {
     this.favourites.add(recipe);
   }
@@ -30,7 +30,7 @@ public class Member extends Person implements Serializable
   public ArrayList<Recipe> getFavourites()
   {
     return favourites;
-  }
+  }*/
 
   public boolean equals(Object obj)
   {
@@ -44,7 +44,7 @@ public class Member extends Person implements Serializable
     return super.equals(other);
   }
 
-  public String toString1()
+  /*public String toString1()
   {
     String temp = super.toString1() + "\nfavourites:";
     for (int i = 0; i < favourites.size(); i++)
@@ -52,5 +52,5 @@ public class Member extends Person implements Serializable
       temp += "\n" + favourites.get(i).toString1();
     }
     return temp;
-  }
+  }*/
 }

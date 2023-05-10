@@ -14,19 +14,28 @@ public class ModelManager implements Model, PropertyChangeListener
 {
   private final Client client;
   //private final Administrator administrator;
+  private ArrayList<Recipe> recipes;
+  private ArrayList<Recipe> personRecipes;
+  private ArrayList<Recipe> favouriteRecipes;
+  private ArrayList<Person> persons;
+  private ArrayList<Ingredient> ingredients;
   private final PropertyChangeSupport support;
 
   public ModelManager(Connector connector) throws RemoteException
   {
     this.client = new Client(connector);
     //this.administrator = Administrator.getInstance();
+    this.recipes = new ArrayList<>();
+    this.personRecipes = new ArrayList<>();
+    this.favouriteRecipes = new ArrayList<>();
+    this.persons = new ArrayList<>();
+    this.ingredients = new ArrayList<>();
     this.client.addPropertyChangeListener(this);
     this.support = new PropertyChangeSupport(this);
   }
 
   @Override public void createAccount(String email, String username, String password)
   {
-    // check if objects have the same recipes and favourites
     try
     {
       this.client.createAccount(email, username, password);
@@ -41,8 +50,7 @@ public class ModelManager implements Model, PropertyChangeListener
   {
     try
     {
-      String usernameTemp = this.client.login(username, password);
-      return usernameTemp;
+      return this.client.login(username, password);
     }
     catch (Exception e)
     {
@@ -123,19 +131,30 @@ public class ModelManager implements Model, PropertyChangeListener
   {
     try
     {
-      return this.client.getAllIngredients();
+      ArrayList<Ingredient> ingredients1 = client.getAllIngredients();
+      this.ingredients.clear();
+      this.ingredients.addAll(ingredients1);
+      return ingredients1;
     }
     catch (RemoteException e)
     {
       throw new RuntimeException(e);
     }
+  }
+
+  @Override public ArrayList<Ingredient> getIngredientsCopy()
+  {
+    return ingredients;
   }
 
   @Override public ArrayList<Recipe> getAllRecipes()
   {
     try
     {
-      return this.client.getAllRecipes();
+      ArrayList<Recipe> recipes1 = client.getAllRecipes();
+      this.recipes.clear();
+      this.recipes.addAll(recipes1);
+      return recipes1;
     }
     catch (RemoteException e)
     {
@@ -143,19 +162,77 @@ public class ModelManager implements Model, PropertyChangeListener
     }
   }
 
-  @Override public void addIngredient(Ingredient ingredient)
+  @Override public ArrayList<Recipe> getRecipesCopy()
   {
-    if (ingredient.getName() == null || ingredient.getName().isEmpty())
-      throw new IllegalArgumentException("Ingredient's name cannot be empty.");
+    return recipes;
+  }
 
+  @Override public ArrayList<Recipe> getRecipesByUsername()
+  {
     try
     {
-      this.client.addIngredient(ingredient);
+      ArrayList<Recipe> recipes1 = client.getRecipesByUsername();
+      this.personRecipes.clear();
+      this.personRecipes.addAll(recipes1);
+      return recipes1;
     }
     catch (RemoteException e)
     {
       throw new RuntimeException(e);
     }
+  }
+
+  @Override public ArrayList<Recipe> getPersonRecipesCopy()
+  {
+    return personRecipes;
+  }
+
+  @Override public ArrayList<Recipe> getFavouriteRecipes()
+  {
+    try
+    {
+      ArrayList<Recipe> recipes1 = client.getFavouriteRecipes();
+      this.favouriteRecipes.clear();
+      this.favouriteRecipes.addAll(recipes1);
+      return recipes1;
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override public ArrayList<Recipe> getFavouriteRecipesCopy()
+  {
+    return favouriteRecipes;
+  }
+
+  @Override public ArrayList<Person> getAllMembers(){
+    try
+    {
+      ArrayList<Person> persons1 = client.getAllMembers();
+      this.persons.clear();
+      this.persons.addAll(persons1);
+      return persons1;
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override public ArrayList<Person> getMembersCopy()
+  {
+    return persons;
+  }
+
+  @Override public void deleteProfile(String username){
+    //this.client.removeMember(String username);
+  }
+
+  @Override public void editProfile(String username, String email, String password)
+  {
+    //this.client.editMember(String username, String email, String password)
   }
 
   @Override public void addPropertyChangeListener(PropertyChangeListener listener)
@@ -168,6 +245,8 @@ public class ModelManager implements Model, PropertyChangeListener
     Platform.runLater(() -> {
       if (evt.getPropertyName().equals("ResetRecipes"))
         this.support.firePropertyChange("ResetRecipes", false, true);
+      else if (evt.getPropertyName().equals("ResetFavourites"))
+        this.support.firePropertyChange("ResetFavourites", false, true);
       else if (evt.getPropertyName().equals("ResetIngredients"))
         this.support.firePropertyChange("ResetIngredients", null, evt.getNewValue());
     });

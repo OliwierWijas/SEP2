@@ -1,6 +1,7 @@
 package dao;
 
 import model.Member;
+import model.Person;
 import model.Recipe;
 
 import java.sql.*;
@@ -50,13 +51,13 @@ public class PersonDAOImplementation implements PersonDAO
     }
   }
 
-  @Override public ArrayList<Member> readMembers() throws SQLException
+  @Override public ArrayList<Person> readMembers() throws SQLException
   {
     try (Connection connection = getConnection())
     {
-      PreparedStatement statement = connection.prepareStatement("SELECT * FROM Person WHERE username != 'Administrator'");
+      PreparedStatement statement = connection.prepareStatement("SELECT * FROM Person WHERE username != 'Administrator';");
       ResultSet resultSet = statement.executeQuery();
-      ArrayList<Member> members = new ArrayList<>();
+      ArrayList<Person> members = new ArrayList<>();
       while (resultSet.next())
       {
         String username = resultSet.getString("username");
@@ -73,7 +74,7 @@ public class PersonDAOImplementation implements PersonDAO
   {
     try (Connection connection = getConnection())
     {
-      PreparedStatement statement = connection.prepareStatement("INSERT INTO Favourites (recipeId, username) VALUES (?, ?);");
+      PreparedStatement statement = connection.prepareStatement("INSERT INTO Favourites (recipeId, username) VALUES (?, ?) ON CONFLICT DO NOTHING;");
       statement.setInt(1, recipe.getId());
       statement.setString(2, username);
       statement.executeUpdate();

@@ -13,6 +13,7 @@ public interface Model
   void addToFavourites(Recipe recipe);
   void removeFromFavourites(Recipe recipe);
   ArrayList<Ingredient> getAllIngredients();
+  ArrayList<Ingredient> getIngredientsCopy();
   ArrayList<Recipe> getAllRecipes();
   void addIngredient(Ingredient ingredient);
   void addPropertyChangeListener(PropertyChangeListener listener);

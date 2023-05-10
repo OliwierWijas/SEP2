@@ -14,6 +14,8 @@ import model.Recipe;
 import view.ViewController;
 import view.ViewFactory;
 import view.ViewHandler;
+import view.menu.MemberMenuHandler;
+import view.menu.MenuHandler;
 import viewmodel.SearchRecipesViewModel;
 
 
@@ -29,12 +31,14 @@ public class SearchRecipesMemberViewController implements ViewController
   private ReadOnlyObjectProperty<Recipe> recipe;
 
   private ViewHandler viewHandler;
+  private MenuHandler menuHandler;
   private SearchRecipesViewModel viewModel;
   private Region root;
 
   public void init(ViewHandler viewHandler, SearchRecipesViewModel viewModel, Region root)
   {
     this.viewHandler = viewHandler;
+    this.menuHandler = MemberMenuHandler.getInstance(viewHandler);
     this.viewModel = viewModel;
     this.root = root;
     this.selectedIngredientList = new SimpleListProperty<>(FXCollections.observableArrayList());

@@ -4,6 +4,7 @@ import dk.via.remote.observer.RemotePropertyChangeEvent;
 import dk.via.remote.observer.RemotePropertyChangeListener;
 import javafx.application.Platform;
 import model.Ingredient;
+import model.Person;
 import model.Recipe;
 import shared.Connector;
 
@@ -116,16 +117,6 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
     return this.connector.getAllIngredients();
   }
 
-  public ArrayList<Recipe> getAllRecipes() throws RemoteException
-  {
-    return this.connector.getAllRecipes();
-  }
-
-  public void addIngredient(Ingredient ingredient) throws RemoteException
-  {
-    this.connector.addIngredient(ingredient);
-  }
-
   public void addPropertyChangeListener(PropertyChangeListener listener)
   {
     this.support.addPropertyChangeListener(listener);
@@ -136,6 +127,8 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
     Platform.runLater(() -> {
       if (event.getPropertyName().equals("RecipeAdded") || event.getPropertyName().equals("RecipeEdited") || event.getPropertyName().equals("RecipeRemoved"))
         this.support.firePropertyChange("ResetRecipes", false, true);
+      else if (event.getPropertyName().equals("AddedToFavourites") || event.getPropertyName().equals("RemovedFromFavourites"))
+        this.support.firePropertyChange("ResetFavourites", false, true);
       else if (event.getPropertyName().equals("IngredientAdded"))
         this.support.firePropertyChange("ResetIngredients", null, event.getNewValue());
     });

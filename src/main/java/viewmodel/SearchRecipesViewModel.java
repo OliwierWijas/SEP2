@@ -35,8 +35,6 @@ public class SearchRecipesViewModel implements PropertyChangeListener
     this.error = new SimpleStringProperty("");
     this.title = new SimpleStringProperty("");
     this.description = new SimpleStringProperty("");
-    resetIngredientList();
-    resetRecipesList();
     this.model.addPropertyChangeListener(this);
     this.support = new PropertyChangeSupport(this);
   }
@@ -50,7 +48,7 @@ public class SearchRecipesViewModel implements PropertyChangeListener
 
       ArrayList<Ingredient> temp1 = new ArrayList<>();
 
-      ArrayList<Recipe> temp2 = model.getAllRecipes();
+      ArrayList<Recipe> temp2 = model.getRecipesCopy();
       recipesList.clear();
 
       for (int i = 0; i < ingredientsTemp.size(); i++)
@@ -84,11 +82,13 @@ public class SearchRecipesViewModel implements PropertyChangeListener
   public void bindRecipeList(ObjectProperty<ObservableList<Recipe>> property)
   {
     property.bind(recipesList);
+    resetRecipesList();
   }
 
   public void bindIngredientList(ObjectProperty<ObservableList<IngredientAdapter>> property)
   {
     property.bind(ingredientList);
+    resetIngredientList();
   }
 
   public void bindSelectedIngredientList(SimpleListProperty<IngredientAdapter> property)
@@ -98,7 +98,7 @@ public class SearchRecipesViewModel implements PropertyChangeListener
 
   public void containRecipe(String text)
   {
-    ArrayList<Recipe> temp = model.getAllRecipes();
+    ArrayList<Recipe> temp = model.getRecipesCopy();
     recipesList.clear();
     for (int i = 0; i < temp.size(); i++)
     {
@@ -109,7 +109,7 @@ public class SearchRecipesViewModel implements PropertyChangeListener
 
   public void containIngredient(String text)
   {
-    ArrayList<Ingredient> temp = model.getAllIngredients();
+    ArrayList<Ingredient> temp = model.getIngredientsCopy();
     ingredientList.clear();
     for (int i = 0; i < temp.size(); i++)
     {

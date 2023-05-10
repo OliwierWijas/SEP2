@@ -47,7 +47,7 @@ public class PersonList
     return members;
   }
 
-  public void addRecipeToPerson(Recipe recipe, String username)
+  /*public void addRecipeToPerson(Recipe recipe, String username)
   {
     if (username.equals(Administrator.USERNAME))
     {
@@ -159,5 +159,5 @@ public class PersonList
       temp += members.get(i).toString1() + "\n\n";
     }
     return temp;
-  }
+  }*/
 }

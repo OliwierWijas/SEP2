@@ -23,7 +23,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Managment">
                <items>
-                  <MenuItem fx:id="PROFILE" mnemonicParsing="false" onAction="#handleMenu" text="Manage Profiles" />
+                  <MenuItem fx:id="MANAGEPROFILESADMIN" mnemonicParsing="false" onAction="#handleMenu" text="Manage Profiles" />
                   <MenuItem fx:id="MANAGERECIPESADMIN" mnemonicParsing="false" onAction="#handleMenu" text="ManageRecepies" />
                </items>
             </Menu>

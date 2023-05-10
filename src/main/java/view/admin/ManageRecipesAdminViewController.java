@@ -14,6 +14,8 @@ import model.Recipe;
 import view.ViewController;
 import view.ViewFactory;
 import view.ViewHandler;
+import view.menu.AdminMenuHandler;
+import view.menu.MenuHandler;
 import viewmodel.ManageRecipesViewModel;
 
 public class ManageRecipesAdminViewController implements ViewController
@@ -30,13 +32,13 @@ public class ManageRecipesAdminViewController implements ViewController
   private ReadOnlyObjectProperty<IngredientAdapter> ingredient;
   private ReadOnlyObjectProperty<Recipe> recipe;
 
-  private ViewHandler viewHandler;
+  private MenuHandler menuHandler;
   private ManageRecipesViewModel viewModel;
   private Region root;
 
   public void init(ViewHandler viewHandler, ManageRecipesViewModel manageRecipesViewModel, Region root)
   {
-    this.viewHandler = viewHandler;
+    this.menuHandler = AdminMenuHandler.getInstance(viewHandler);
     this.viewModel = manageRecipesViewModel;
     this.root = root;
 

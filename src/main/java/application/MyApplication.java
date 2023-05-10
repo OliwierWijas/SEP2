@@ -20,10 +20,6 @@ public class MyApplication extends Application
     Registry registry = LocateRegistry.getRegistry(1099);
     Connector connector = (Connector) registry.lookup("rmiServer");
     Model model = new ModelManager(connector);
-    model.addIngredient(new Ingredient("Potato"));
-    model.addIngredient(new Ingredient("Green Beans"));
-    model.addIngredient(new Ingredient("Sriracha"));
-
     ViewModelFactory viewModelFactory = new ViewModelFactory(model);
     ViewHandler viewHandler = new ViewHandler(viewModelFactory);
     viewHandler.start(primaryStage);

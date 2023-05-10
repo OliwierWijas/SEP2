@@ -2,6 +2,7 @@ package shared;
 
 import dk.via.remote.observer.RemotePropertyChangeListener;
 import model.Ingredient;
+import model.Person;
 import model.Recipe;
 
 import java.rmi.Remote;
@@ -17,8 +18,10 @@ public interface Connector extends Remote
   void removeRecipe(Recipe recipe, String username) throws RemoteException;
   void addToFavourites(Recipe recipe, String username) throws RemoteException;
   void removeFromFavourites(Recipe recipe, String username) throws RemoteException;
-  ArrayList<Ingredient> getAllIngredients() throws RemoteException;
   ArrayList<Recipe> getAllRecipes() throws RemoteException;
-  void addIngredient(Ingredient ingredient) throws RemoteException;
+  ArrayList<Recipe> getRecipesByUsername(String username) throws RemoteException;
+  ArrayList<Recipe> getFavouriteRecipes(String username) throws RemoteException;
+  ArrayList<Person> getAllMembers() throws RemoteException;
+  ArrayList<Ingredient> getAllIngredients() throws RemoteException;
   void addRemotePropertyChangeListener(RemotePropertyChangeListener listener) throws RemoteException;
 }

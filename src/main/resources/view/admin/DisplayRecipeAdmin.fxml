@@ -21,7 +21,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Management">
                <items>
-                  <MenuItem fx:id="MANAGEPROFILES" mnemonicParsing="false" onAction="#handleMenu" text="Manage Profiles" />
+                  <MenuItem fx:id="MANAGEPROFILESADMIN" mnemonicParsing="false" onAction="#handleMenu" text="Manage Profiles" />
                   <MenuItem fx:id="MANAGERECIPESADMIN" mnemonicParsing="false" onAction="#handleMenu" text="Manage Recipes" />
                </items>
             </Menu>

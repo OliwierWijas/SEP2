@@ -10,6 +10,8 @@ import model.IngredientAdapter;
 import view.ViewController;
 import view.ViewFactory;
 import view.ViewHandler;
+import view.menu.AdminMenuHandler;
+import view.menu.MenuHandler;
 import viewmodel.DisplayRecipeViewModel;
 
 public class DisplayRecipeAdminViewController implements ViewController
@@ -21,12 +23,14 @@ public class DisplayRecipeAdminViewController implements ViewController
   @FXML private Label error;
 
   private ViewHandler viewHandler;
+  private MenuHandler menuHandler;
   private DisplayRecipeViewModel viewModel;
   private Region root;
 
   public void init(ViewHandler viewHandler, DisplayRecipeViewModel displayRecipeViewModel, Region root)
   {
     this.viewHandler = viewHandler;
+    this.menuHandler = AdminMenuHandler.getInstance(viewHandler);
     this.viewModel = displayRecipeViewModel;
     this.root = root;
 

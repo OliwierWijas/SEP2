@@ -2,10 +2,7 @@ package dao;
 
 import model.Ingredient;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class IngredientDAOImplementation implements IngredientDAO
@@ -36,10 +33,27 @@ public class IngredientDAOImplementation implements IngredientDAO
     {
       for (int i = 0; i < ingredients.size(); i++)
       {
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO Ingredient (name) VALUES (?) ON CONFLICT DO NOTHING");
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO Ingredient (name) VALUES (?) ON CONFLICT DO NOTHING;");
         statement.setString(1, ingredients.get(i).getName());
         statement.executeUpdate();
       }
+    }
+  }
+
+  @Override public ArrayList<Ingredient> readIngredients() throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement("SELECT * FROM Ingredient;");
+      ResultSet resultSet = statement.executeQuery();
+      ArrayList<Ingredient> ingredients = new ArrayList<>();
+      while (resultSet.next())
+      {
+        String name = resultSet.getString("name");
+        Ingredient ingredient = new Ingredient(name);
+        ingredients.add(ingredient);
+      }
+      return ingredients;
     }
   }
 }

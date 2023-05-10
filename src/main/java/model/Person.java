@@ -8,14 +8,12 @@ public abstract class Person implements Serializable
   private final String email;
   private String username;
   private String password;
-  private final ArrayList<Recipe> recipes;
 
   public Person(String email, String username, String password)
   {
     this.email = email;
     this.username = username;
     this.password = password;
-    this.recipes = new ArrayList<>();
   }
 
   public void setUsername(String username)
@@ -43,7 +41,7 @@ public abstract class Person implements Serializable
     return password;
   }
 
-  public ArrayList<Recipe> getRecipes()
+  /*public ArrayList<Recipe> getRecipes()
   {
     return recipes;
   }
@@ -98,7 +96,7 @@ public abstract class Person implements Serializable
       temp += "\n" + recipes.get(i).toString1();
     }
     return temp;
-  }
+  }*/
 
   public boolean equals(Object obj)
   {

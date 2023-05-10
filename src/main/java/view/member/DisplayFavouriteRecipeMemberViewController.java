@@ -2,7 +2,9 @@ package view.member;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import model.IngredientAdapter;
 import view.ViewController;
@@ -10,12 +12,10 @@ import view.ViewFactory;
 import view.ViewHandler;
 import view.menu.MemberMenuHandler;
 import view.menu.MenuHandler;
-import viewmodel.DisplayRecipeViewModel;
-import javafx.scene.control.*;
+import viewmodel.DisplayFavouriteRecipeViewModel;
 
 
-public class DisplayRecipeMemberViewController implements ViewController
-{
+public class DisplayFavouriteRecipeMemberViewController implements ViewController {
   @FXML private Label title;
   @FXML private Label author;
   @FXML private ListView<IngredientAdapter> ingredientListView;
@@ -24,10 +24,10 @@ public class DisplayRecipeMemberViewController implements ViewController
 
   private ViewHandler viewHandler;
   private MenuHandler menuHandler;
-  private DisplayRecipeViewModel viewModel;
+  private DisplayFavouriteRecipeViewModel viewModel;
   private Region root;
 
-  public void init(ViewHandler viewHandler, DisplayRecipeViewModel displayRecipeViewModel, Region root)
+  public void init(ViewHandler viewHandler, DisplayFavouriteRecipeViewModel displayRecipeViewModel, Region root)
   {
     this.viewHandler = viewHandler;
     this.menuHandler = MemberMenuHandler.getInstance(viewHandler);
@@ -43,21 +43,16 @@ public class DisplayRecipeMemberViewController implements ViewController
 
   @FXML protected void handleMenu(Event event)
   {
-    if (event.getSource().toString().contains(ViewFactory.MANAGERECIPESMEMBER))
-      viewHandler.openView(ViewFactory.MANAGERECIPESMEMBER);
-    else if (event.getSource().toString().contains(ViewFactory.SEARCHMEMBER))
-      viewHandler.openView(ViewFactory.SEARCHMEMBER);
+    menuHandler.handleMenu(event);
   }
-
-  @FXML protected void addToFavourites()
-  {
-    this.viewModel.addToFavourites();
+  @FXML protected void removeFromFavourites(){
+    this.viewModel.removeFromFavourites();
   }
 
   @FXML protected void goBackButtonPressed()
   {
     reset();
-    viewHandler.openView(ViewFactory.SEARCHMEMBER);
+    viewHandler.openView(ViewFactory.SEARCHFAVOURITESMEMBER);
   }
 
   @Override public void reset()
@@ -69,4 +64,5 @@ public class DisplayRecipeMemberViewController implements ViewController
   {
     return root;
   }
+
 }

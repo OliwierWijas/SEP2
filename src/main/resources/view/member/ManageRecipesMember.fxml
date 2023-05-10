@@ -23,9 +23,9 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Profile">
             <items>
-                  <MenuItem fx:id="PROFILE" mnemonicParsing="false" onAction="#handleMenu" text="Edit profile" />
+                  <MenuItem fx:id="MANAGEPROFILEMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="Edit profile" />
                   <MenuItem fx:id="MANAGERECIPESMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="My recipes" />
-              <MenuItem fx:id="FAVOURITES" mnemonicParsing="false" onAction="#handleMenu" text="My favourites" />
+              <MenuItem fx:id="SEARCHFAVOURITESMEMBER" mnemonicParsing="false" onAction="#handleMenu" text="My favourites" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
