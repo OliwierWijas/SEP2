@@ -15,6 +15,14 @@ public interface Model
   ArrayList<Ingredient> getAllIngredients();
   ArrayList<Ingredient> getIngredientsCopy();
   ArrayList<Recipe> getAllRecipes();
-  void addIngredient(Ingredient ingredient);
+  ArrayList<Recipe> getRecipesCopy();
+  ArrayList<Recipe> getRecipesByUsername();
+  ArrayList<Recipe> getPersonRecipesCopy();
+  ArrayList<Recipe> getFavouriteRecipes();
+  ArrayList<Recipe> getFavouriteRecipesCopy();
+  ArrayList<Person> getAllMembers();
+  ArrayList<Person> getMembersCopy();
+  void deleteProfile(String username);
+  void editProfile(String username, String email, String password);
   void addPropertyChangeListener(PropertyChangeListener listener);
 }

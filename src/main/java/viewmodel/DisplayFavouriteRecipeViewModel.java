@@ -11,7 +11,7 @@ import model.Recipe;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class DisplayRecipeViewModel implements PropertyChangeListener
+public class DisplayFavouriteRecipeViewModel implements PropertyChangeListener
 {
   private final Model model;
   private Recipe recipe;
@@ -21,8 +21,7 @@ public class DisplayRecipeViewModel implements PropertyChangeListener
   private final StringProperty description;
   private final StringProperty error;
 
-  public DisplayRecipeViewModel(Model model)
-  {
+  public DisplayFavouriteRecipeViewModel(Model model) {
     this.model = model;
     this.recipe = null;
     this.title = new SimpleStringProperty("");
@@ -30,11 +29,6 @@ public class DisplayRecipeViewModel implements PropertyChangeListener
     this.ingredientsList = new SimpleListProperty<>(FXCollections.observableArrayList());
     this.description = new SimpleStringProperty("");
     this.error = new SimpleStringProperty("");
-  }
-
-  public void addToFavourites()
-  {
-    this.model.addToFavourites(recipe);
   }
 
   public void bindTitle(StringProperty property)
@@ -56,6 +50,9 @@ public class DisplayRecipeViewModel implements PropertyChangeListener
   {
     this.description.bindBidirectional(property);
   }
+  public void removeFromFavourites(){
+    this.model.removeFromFavourites(recipe);
+  }
 
   public void bindError(StringProperty property)
   {
@@ -70,7 +67,6 @@ public class DisplayRecipeViewModel implements PropertyChangeListener
     this.description.set("");
     this.error.set("");
   }
-
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
     Platform.runLater(() -> {

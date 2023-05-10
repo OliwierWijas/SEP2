@@ -1,6 +1,7 @@
 package viewmodel;
 
 import model.Model;
+import view.member.SearchFavouriteRecipesMemberViewLoader;
 
 public class ViewModelFactory
 {
@@ -9,7 +10,9 @@ public class ViewModelFactory
   private final LoginViewModel loginViewModel;
   private final CreateAccountViewModel createAccountViewModel;
   private final DisplayRecipeViewModel displayRecipeViewModel;
-
+  private final ManageProfilesViewModel manageProfilesViewModel;
+  private final DisplayFavouriteRecipeViewModel displayFavouriteRecipeViewModel;
+  private final SearchFavouriteRecipesViewModel searchFavouriteRecipesViewModel;
   public ViewModelFactory(Model model)
   {
     this.searchRecipesViewModel = new SearchRecipesViewModel(model);
@@ -18,6 +21,10 @@ public class ViewModelFactory
     this.createAccountViewModel = new CreateAccountViewModel(model);
     this.displayRecipeViewModel = new DisplayRecipeViewModel(model);
     this.searchRecipesViewModel.addPropertyChangeListener(this.displayRecipeViewModel);
+    this.manageProfilesViewModel = new ManageProfilesViewModel(model);
+    this.displayFavouriteRecipeViewModel = new DisplayFavouriteRecipeViewModel(model);
+    this.searchFavouriteRecipesViewModel = new SearchFavouriteRecipesViewModel(model);
+    this.searchFavouriteRecipesViewModel.addPropertyChangeListener(displayFavouriteRecipeViewModel);
 
   }
 
@@ -44,5 +51,14 @@ public class ViewModelFactory
   public DisplayRecipeViewModel getDisplayRecipeViewModel()
   {
     return displayRecipeViewModel;
+  }
+  public ManageProfilesViewModel getManageProfilesViewModel(){
+    return manageProfilesViewModel;
+  }
+  public DisplayFavouriteRecipeViewModel getDisplayFavouriteRecipeViewModel(){
+    return displayFavouriteRecipeViewModel;
+  }
+  public SearchFavouriteRecipesViewModel getSearchFavouriteRecipesViewModel(){
+    return searchFavouriteRecipesViewModel;
   }
 }

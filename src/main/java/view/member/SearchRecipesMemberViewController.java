@@ -64,10 +64,7 @@ public class SearchRecipesMemberViewController implements ViewController
 
   @FXML protected void handleMenu(Event event)
   {
-    if (event.getSource().toString().contains(ViewFactory.MANAGERECIPESMEMBER))
-      viewHandler.openView(ViewFactory.MANAGERECIPESMEMBER);
-    else if (event.getSource().toString().contains(ViewFactory.SEARCHMEMBER))
-      viewHandler.openView(ViewFactory.SEARCHMEMBER);
+    menuHandler.handleMenu(event);
   }
 
   @FXML protected void recipeChangeListener()

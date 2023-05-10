@@ -112,6 +112,26 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
     }
   }
 
+  public ArrayList<Recipe> getAllRecipes() throws RemoteException
+  {
+    return this.connector.getAllRecipes();
+  }
+
+  public ArrayList<Recipe> getRecipesByUsername() throws RemoteException
+  {
+    return this.connector.getRecipesByUsername(username);
+  }
+
+  public ArrayList<Recipe> getFavouriteRecipes() throws RemoteException
+  {
+    return this.connector.getFavouriteRecipes(username);
+  }
+
+  public ArrayList<Person> getAllMembers() throws RemoteException
+  {
+    return this.connector.getAllMembers();
+  }
+
   public ArrayList<Ingredient> getAllIngredients() throws RemoteException
   {
     return this.connector.getAllIngredients();
