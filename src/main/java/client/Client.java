@@ -52,6 +52,11 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
     }
   }
 
+  public String getUsername() throws RemoteException
+  {
+    return username;
+  }
+
   public void addRecipe(String title, String description, ArrayList<Ingredient> ingredients) throws RemoteException
   {
     try

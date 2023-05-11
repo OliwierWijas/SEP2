@@ -38,10 +38,6 @@ public class RemoteConnector implements Connector
   @Override public synchronized String createAccount(String email,
       String username, String password) throws RemoteException
   {
-    UsernameValidator.validateUsername(username);
-    EmailValidator.validateEmail(email);
-    PasswordValidator.validatePassword(password);
-
     Member member = new Member(email, username, password);
     try
     {

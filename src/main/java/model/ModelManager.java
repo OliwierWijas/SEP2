@@ -2,6 +2,9 @@ package model;
 
 import client.Client;
 import javafx.application.Platform;
+import model.validation.EmailValidator;
+import model.validation.PasswordValidator;
+import model.validation.UsernameValidator;
 import shared.Connector;
 
 import java.beans.PropertyChangeEvent;
@@ -39,6 +42,9 @@ public class ModelManager implements Model, PropertyChangeListener
   {
     try
     {
+      UsernameValidator.validateUsername(username);
+      EmailValidator.validateEmail(email);
+      PasswordValidator.validatePassword(password);
       this.client.createAccount(email, username, password);
     }
     catch (Exception e)

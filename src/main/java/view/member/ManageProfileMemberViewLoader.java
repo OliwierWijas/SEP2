@@ -5,7 +5,6 @@ import javafx.scene.layout.Region;
 import view.ViewController;
 import view.ViewHandler;
 import view.ViewLoader;
-import view.admin.ManageProfilesAdminViewController;
 import viewmodel.ViewModelFactory;
 
 public class ManageProfileMemberViewLoader extends ViewLoader
@@ -23,7 +22,7 @@ public class ManageProfileMemberViewLoader extends ViewLoader
     @Override protected ViewController createViewController(FXMLLoader loader, Region root)
     {
       ManageProfileMemberViewController manageProfileMemberViewController = loader.getController();
-      manageProfileMemberViewController.init(viewHandler, viewModelFactory.getManageProfilesViewModel(), root);
+      manageProfileMemberViewController.init(viewHandler, viewModelFactory.getManageMemberProfilesViewModel(), root);
       return manageProfileMemberViewController;
     }
 

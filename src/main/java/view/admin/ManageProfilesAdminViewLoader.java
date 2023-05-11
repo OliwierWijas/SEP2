@@ -22,7 +22,7 @@ public class ManageProfilesAdminViewLoader extends ViewLoader
   @Override protected ViewController createViewController(FXMLLoader loader, Region root)
   {
     ManageProfilesAdminViewController manageProfilesAdminViewController = loader.getController();
-    manageProfilesAdminViewController.init(viewHandler, viewModelFactory.getManageProfilesViewModel(), root);
+    manageProfilesAdminViewController.init(viewHandler, viewModelFactory.getManageProfilesAdminViewModel(), root);
     return manageProfilesAdminViewController;
   }
 }

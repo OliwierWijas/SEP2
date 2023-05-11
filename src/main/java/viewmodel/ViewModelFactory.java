@@ -53,8 +53,12 @@ public class ViewModelFactory
   {
     return displayRecipeViewModel;
   }
-  public ManageProfilesViewModel getManageProfilesViewModel(){
-    return manageProfilesViewModel;
+  public ManageProfilesAdminViewModel getManageProfilesAdminViewModel(){
+    return manageProfilesAdminViewModel;
+  }
+
+  public ManageMemberProfileViewModel getManageMemberProfilesViewModel(){
+    return manageMemberProfileViewModel;
   }
   public DisplayFavouriteRecipeViewModel getDisplayFavouriteRecipeViewModel(){
     return displayFavouriteRecipeViewModel;
