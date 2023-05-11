@@ -257,6 +257,7 @@ public class RemoteConnector implements Connector
     try
     {
       this.personDAO.removeMember(username);
+      this.support.firePropertyChange("AccountRemoved", null, username);
     }
     catch (SQLException e)
     {

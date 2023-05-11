@@ -4,12 +4,15 @@ import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import model.*;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class SearchRecipesViewModel implements PropertyChangeListener
 {
@@ -150,9 +153,7 @@ public class SearchRecipesViewModel implements PropertyChangeListener
   {
     Platform.runLater(() -> {
       if (evt.getPropertyName().equals("ResetIngredients"))
-      {
         resetIngredientList();
-      }
       else if (evt.getPropertyName().equals("ResetRecipes"))
       {
         resetRecipesList();

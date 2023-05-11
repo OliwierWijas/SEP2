@@ -1,13 +1,17 @@
 package viewmodel;
 
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import model.Model;
 import model.Person;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class ManageProfilesAdminViewModel implements ManageProfilesInterface, PropertyChangeListener
 {
@@ -21,13 +25,13 @@ public class ManageProfilesAdminViewModel implements ManageProfilesInterface, Pr
 
   public ManageProfilesAdminViewModel(Model model){
     this.model = model;
-    this.model.addPropertyChangeListener(this);
-    this.profilesList = new SimpleListProperty<>();
+    this.profilesList = new SimpleListProperty<>(FXCollections.observableArrayList());
     this.selectedProfile = new SimpleObjectProperty<>();
     this.username = new SimpleStringProperty("");
     this.email = new SimpleStringProperty("");
     this.password = new SimpleStringProperty("");
     this.error = new SimpleStringProperty("");
+    this.model.addPropertyChangeListener(this);
   }
   @Override public void bindUsername(StringProperty property)
   {
@@ -97,12 +101,19 @@ public class ManageProfilesAdminViewModel implements ManageProfilesInterface, Pr
   @Override public void deleteProfile()
   {
     if (selectedProfile.get() != null)
-      model.deleteProfile(selectedProfile.get().getUsername());
+    {
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+      alert.setHeaderText(null);
+      alert.setContentText("Are you sure you want to delete the account?");
+      Optional<ButtonType> option = alert.showAndWait();
+      if (option.get() == ButtonType.OK)
+        model.deleteProfile(selectedProfile.get().getUsername());
+    }
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
-    if (evt.getPropertyName().equals("AccountCreated"))
+    if (evt.getPropertyName().equals("AccountCreated") || evt.getPropertyName().equals("AccountRemoved"))
       resetProfiles();
   }
 }

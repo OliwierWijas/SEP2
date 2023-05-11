@@ -37,11 +37,11 @@ public class ManageProfilesAdminViewController implements ViewController
     this.viewModel = manageProfilesAdminViewModel;
     this.root = root;
 
-    this.viewModel.bindProfiles(profiles.itemsProperty());
     this.viewModel.bindUsername(username.textProperty());
     this.viewModel.bindEmail(email.textProperty());
     this.viewModel.bindPassword(password.textProperty());
     this.viewModel.bindError(error.textProperty());
+    this.viewModel.bindProfiles(profiles.itemsProperty());
     this.profile = profiles.getSelectionModel().selectedItemProperty();
     this.viewModel.bindProfile(profile);
   }

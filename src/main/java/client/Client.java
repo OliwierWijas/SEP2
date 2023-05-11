@@ -3,6 +3,7 @@ package client;
 import dk.via.remote.observer.RemotePropertyChangeEvent;
 import dk.via.remote.observer.RemotePropertyChangeListener;
 import javafx.application.Platform;
+import model.Administrator;
 import model.Ingredient;
 import model.Person;
 import model.Recipe;
@@ -194,6 +195,12 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
         this.support.firePropertyChange("ResetIngredients", null, event.getNewValue());
       else if (event.getPropertyName().equals("AccountCreated"))
         this.support.firePropertyChange("AccountCreated", null, event.getNewValue());
+      else if (event.getPropertyName().equals("AccountRemoved"))
+      {
+        if (event.getNewValue().equals(username))
+          this.support.firePropertyChange("YourAccountRemoved", null, event.getNewValue());
+        this.support.firePropertyChange("AccountRemoved",null, event.getNewValue());
+      }
     });
   }
 }

@@ -197,7 +197,7 @@ public class ManageRecipesViewModel implements PropertyChangeListener
 
   private void resetRecipesList()
   {
-    recipesList.setAll(model.getRecipesByUsername());
+    this.recipesList.setAll(model.getRecipesByUsername());
   }
 
   @Override public void propertyChange(PropertyChangeEvent evt)

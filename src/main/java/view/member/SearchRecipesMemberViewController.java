@@ -18,8 +18,10 @@ import view.menu.MemberMenuHandler;
 import view.menu.MenuHandler;
 import viewmodel.SearchRecipesViewModel;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-public class SearchRecipesMemberViewController implements ViewController
+public class SearchRecipesMemberViewController implements ViewController, PropertyChangeListener
 {
   @FXML private TextField searchRecipeTextField;
   @FXML private TextField searchIngredientTextField;
@@ -40,6 +42,7 @@ public class SearchRecipesMemberViewController implements ViewController
     this.viewHandler = viewHandler;
     this.menuHandler = MemberMenuHandler.getInstance(viewHandler);
     this.viewModel = viewModel;
+    this.viewModel.addPropertyChangeListener(this);
     this.root = root;
     this.selectedIngredientList = new SimpleListProperty<>(FXCollections.observableArrayList());
     this.nameCell.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -94,5 +97,11 @@ public class SearchRecipesMemberViewController implements ViewController
   @Override public Region getRoot()
   {
     return root;
+  }
+
+  @Override public void propertyChange(PropertyChangeEvent evt)
+  {
+    if (evt.getPropertyName().equals("YourAccountRemoved"))
+      this.viewHandler.openView(ViewFactory.LOGIN);
   }
 }

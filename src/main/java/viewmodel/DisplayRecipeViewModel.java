@@ -74,15 +74,18 @@ public class DisplayRecipeViewModel implements PropertyChangeListener
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
     Platform.runLater(() -> {
-      this.recipe = (Recipe) evt.getNewValue();
-      this.title.set(recipe.getTitle());
-      this.author.set(recipe.getUsername());
-      for (int i = 0; i < recipe.getIngredients().size(); i++)
+      if (evt.getPropertyName().equals(SearchRecipesViewModel.RECIPESELECTED))
       {
-        ingredientsList.add(new IngredientAdapter(recipe.getIngredients().get(i)));
+        this.recipe = (Recipe) evt.getNewValue();
+        this.title.set(recipe.getTitle());
+        this.author.set(recipe.getUsername());
+        for (int i = 0; i < recipe.getIngredients().size(); i++)
+        {
+          ingredientsList.add(new IngredientAdapter(recipe.getIngredients().get(i)));
+        }
+        this.description.set(recipe.getDescription());
+        this.error.set("");
       }
-      this.description.set(recipe.getDescription());
-      this.error.set("");
     });
   }
 }

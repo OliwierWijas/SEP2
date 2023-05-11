@@ -295,6 +295,10 @@ public class ModelManager implements Model, PropertyChangeListener
         this.support.firePropertyChange("ResetIngredients", null, evt.getNewValue());
       else if (evt.getPropertyName().equals("AccountCreated"))
         this.support.firePropertyChange("AccountCreated", null, evt.getNewValue());
+      else if (evt.getPropertyName().equals("AccountRemoved"))
+        this.support.firePropertyChange("AccountRemoved", false, true);
+      else if (evt.getPropertyName().equals("YourAccountRemoved"))
+        this.support.firePropertyChange("YourAccountRemoved", false, true);
     });
   }
 }
