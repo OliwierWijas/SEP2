@@ -30,7 +30,6 @@ public class SearchRecipesViewModel implements PropertyChangeListener
   public SearchRecipesViewModel(Model model)
   {
     this.model = model;
-
     this.recipesList = new SimpleListProperty<>(FXCollections.observableArrayList());
     this.recipe = new SimpleObjectProperty<>();
     this.ingredientList = new SimpleListProperty<>(FXCollections.observableArrayList());
@@ -158,6 +157,14 @@ public class SearchRecipesViewModel implements PropertyChangeListener
       {
         resetRecipesList();
         resetIngredientList();
+      }
+      else if(evt.getPropertyName().equals("YourAccountRemoved"))
+      {
+        this.support.firePropertyChange("YourAccountRemoved", false, true);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText("Your account has been removed by the administrator.");
+        alert.show();
       }
     });
   }
