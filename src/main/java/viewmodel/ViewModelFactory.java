@@ -1,7 +1,6 @@
 package viewmodel;
 
 import model.Model;
-import view.member.SearchFavouriteRecipesMemberViewLoader;
 
 public class ViewModelFactory
 {
@@ -10,7 +9,8 @@ public class ViewModelFactory
   private final LoginViewModel loginViewModel;
   private final CreateAccountViewModel createAccountViewModel;
   private final DisplayRecipeViewModel displayRecipeViewModel;
-  private final ManageProfilesViewModel manageProfilesViewModel;
+  private final ManageProfilesAdminViewModel manageProfilesAdminViewModel;
+  private final ManageMemberProfileViewModel manageMemberProfileViewModel;
   private final DisplayFavouriteRecipeViewModel displayFavouriteRecipeViewModel;
   private final SearchFavouriteRecipesViewModel searchFavouriteRecipesViewModel;
   public ViewModelFactory(Model model)
@@ -21,7 +21,8 @@ public class ViewModelFactory
     this.createAccountViewModel = new CreateAccountViewModel(model);
     this.displayRecipeViewModel = new DisplayRecipeViewModel(model);
     this.searchRecipesViewModel.addPropertyChangeListener(this.displayRecipeViewModel);
-    this.manageProfilesViewModel = new ManageProfilesViewModel(model);
+    this.manageProfilesAdminViewModel = new ManageProfilesAdminViewModel(model);
+    this.manageMemberProfileViewModel = new ManageMemberProfileViewModel(model);
     this.displayFavouriteRecipeViewModel = new DisplayFavouriteRecipeViewModel(model);
     this.searchFavouriteRecipesViewModel = new SearchFavouriteRecipesViewModel(model);
     this.searchFavouriteRecipesViewModel.addPropertyChangeListener(displayFavouriteRecipeViewModel);

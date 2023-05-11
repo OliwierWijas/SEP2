@@ -34,7 +34,8 @@ public class ModelManager implements Model, PropertyChangeListener
     this.support = new PropertyChangeSupport(this);
   }
 
-  @Override public void createAccount(String email, String username, String password)
+  @Override public void createAccount(String email, String username,
+      String password)
   {
     try
     {
@@ -42,7 +43,7 @@ public class ModelManager implements Model, PropertyChangeListener
     }
     catch (Exception e)
     {
-      throw new IllegalArgumentException(e.getMessage());
+      throw new IllegalArgumentException(e);
     }
   }
 
@@ -54,11 +55,24 @@ public class ModelManager implements Model, PropertyChangeListener
     }
     catch (Exception e)
     {
-      throw new IllegalArgumentException(e.getMessage());
+      throw new IllegalArgumentException(e);
     }
   }
 
-  @Override public void addRecipe(String title, String description, ArrayList<Ingredient> ingredients)
+  @Override public String getUsername()
+  {
+    try
+    {
+      return client.getUsername();
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override public void addRecipe(String title, String description,
+      ArrayList<Ingredient> ingredients)
   {
     try
     {
@@ -66,11 +80,12 @@ public class ModelManager implements Model, PropertyChangeListener
     }
     catch (Exception e)
     {
-      throw new IllegalArgumentException(e.getMessage());
+      throw new IllegalArgumentException(e);
     }
   }
 
-  @Override public void editRecipe(Recipe recipe, String title, String description, ArrayList<Ingredient> ingredients)
+  @Override public void editRecipe(Recipe recipe, String title,
+      String description, ArrayList<Ingredient> ingredients)
   {
     try
     {
@@ -78,7 +93,7 @@ public class ModelManager implements Model, PropertyChangeListener
     }
     catch (Exception e)
     {
-      throw new IllegalArgumentException(e.getMessage());
+      throw new IllegalArgumentException(e);
     }
   }
 
@@ -93,7 +108,7 @@ public class ModelManager implements Model, PropertyChangeListener
     }
     catch (Exception e)
     {
-      throw new IllegalArgumentException(e.getMessage());
+      throw new IllegalArgumentException(e);
     }
   }
 
@@ -123,7 +138,7 @@ public class ModelManager implements Model, PropertyChangeListener
     }
     catch (Exception e)
     {
-      throw new IllegalArgumentException(e.getMessage());
+      throw new IllegalArgumentException(e);
     }
   }
 
@@ -207,7 +222,8 @@ public class ModelManager implements Model, PropertyChangeListener
     return favouriteRecipes;
   }
 
-  @Override public ArrayList<Person> getAllMembers(){
+  @Override public ArrayList<Person> getAllMembers()
+  {
     try
     {
       ArrayList<Person> persons1 = client.getAllMembers();
@@ -226,16 +242,38 @@ public class ModelManager implements Model, PropertyChangeListener
     return persons;
   }
 
-  @Override public void deleteProfile(String username){
-    //this.client.removeMember(String username);
-  }
-
-  @Override public void editProfile(String username, String email, String password)
+  @Override public void editEmail(String username, String email)
   {
-    //this.client.editMember(String username, String email, String password)
+    try{
+      EmailValidator.validateEmail(email);
+      this.client.editEmail(username, email);
+    }catch (Exception e){
+      throw new IllegalArgumentException(e);
+    }
+
   }
 
-  @Override public void addPropertyChangeListener(PropertyChangeListener listener)
+  @Override public void editPassword(String username, String password)
+  {
+    try
+    {
+      PasswordValidator.validatePassword(password);
+      this.client.editPassword(username, password);
+    }
+    catch (Exception e)
+    {
+      throw new IllegalArgumentException(e);
+    }
+
+  }
+
+  @Override public void deleteProfile(String username)
+  {
+    this.client.deleteProfile(username);
+  }
+
+  @Override public void addPropertyChangeListener(
+      PropertyChangeListener listener)
   {
     this.support.addPropertyChangeListener(listener);
   }
@@ -249,6 +287,8 @@ public class ModelManager implements Model, PropertyChangeListener
         this.support.firePropertyChange("ResetFavourites", false, true);
       else if (evt.getPropertyName().equals("ResetIngredients"))
         this.support.firePropertyChange("ResetIngredients", null, evt.getNewValue());
+      else if (evt.getPropertyName().equals("AccountCreated"))
+        this.support.firePropertyChange("AccountCreated", null, evt.getNewValue());
     });
   }
 }

@@ -60,14 +60,19 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Button layoutX="929.0" layoutY="649.0" mnemonicParsing="false" onAction="#editProfileButtonClicked" text="Edit">
+      <Button layoutX="359.0" layoutY="179.0" mnemonicParsing="false" onAction="#editEmailButtonClicked" prefHeight="14.0" prefWidth="106.0" text="Edit Email">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
+      <Button layoutX="856.0" layoutY="649.0" mnemonicParsing="false" onAction="#deleteProfileButtonClicked" text="Delete Account">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button layoutX="780.0" layoutY="649.0" mnemonicParsing="false" onAction="#deleteProfileButtonClicked" text="Delete Account">
+      <Button layoutX="359.0" layoutY="229.0" mnemonicParsing="false" onAction="#editPasswordButtonClicked" prefHeight="27.0" prefWidth="106.0" text="Edit Password">
          <font>
-            <Font size="16.0" />
+            <Font size="13.0" />
          </font>
       </Button>
    </children>

@@ -61,7 +61,7 @@ public class SearchFavouriteRecipesViewModel implements PropertyChangeListener
 
   public void containRecipe(String text)
   {
-    ArrayList<Recipe> temp = model.getRecipesCopy();
+    ArrayList<Recipe> temp = model.getFavouriteRecipesCopy();
     recipesList.clear();
     for (int i = 0; i < temp.size(); i++)
     {

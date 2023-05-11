@@ -41,12 +41,51 @@ public class PersonDAOImplementation implements PersonDAO
     }
   }
 
-  @Override public void removeMember(Member member) throws SQLException
+  @Override public boolean login(String username, String password) throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement("SELECT * FROM Person WHERE username = ? AND password = ?;");
+      statement.setString(1, username);
+      statement.setString(2, password);
+      ResultSet resultSet = statement.executeQuery();
+      int count = 0;
+      while (resultSet.next())
+      {
+        count++;
+      }
+      return count == 1;
+    }
+  }
+
+  @Override public void updateEmail(String username, String email) throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement("UPDATE Person SET email = ? WHERE username = ?;");
+      statement.setString(1, email);
+      statement.setString(2, username);
+      statement.executeUpdate();
+    }
+  }
+
+  @Override public void updatePassword(String username, String password) throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement("UPDATE Person SET password = ? WHERE username = ?;");
+      statement.setString(1, password);
+      statement.setString(2, username);
+      statement.executeUpdate();
+    }
+  }
+
+  @Override public void removeMember(String username) throws SQLException
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement("DELETE FROM Person WHERE username = ?;");
-      statement.setString(1, member.getUsername());
+      statement.setString(1, username);
       statement.executeUpdate();
     }
   }
@@ -92,22 +131,6 @@ public class PersonDAOImplementation implements PersonDAO
     }
   }
 
-  @Override public boolean login(String username, String password) throws SQLException
-  {
-    try (Connection connection = getConnection())
-    {
-      PreparedStatement statement = connection.prepareStatement("SELECT * FROM Person WHERE username = ? AND password = ?;");
-      statement.setString(1, username);
-      statement.setString(2, password);
-      ResultSet resultSet = statement.executeQuery();
-      int count = 0;
-      while (resultSet.next())
-      {
-        count++;
-      }
-      return count == 1;
-    }
-  }
 
   @Override public void rate(Recipe recipe, String username, int rate) throws SQLException
   {

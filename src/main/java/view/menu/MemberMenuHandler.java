@@ -30,10 +30,7 @@ public class MemberMenuHandler implements MenuHandler
     else if (event.getSource().toString().contains(ViewFactory.SEARCHMEMBER))
       viewHandler.openView(ViewFactory.SEARCHMEMBER);
     else if(event.getSource().toString().contains(ViewFactory.MANAGEPROFILEMEMBER))
-    {
-      System.out.println("rnekjrgnkjergjkergjberjgbewjrgblk");
       viewHandler.openView(ViewFactory.MANAGEPROFILEMEMBER);
-    }
     else if (event.getSource().toString().contains(ViewFactory.SEARCHFAVOURITESMEMBER))
       viewHandler.openView(ViewFactory.SEARCHFAVOURITESMEMBER);
   }

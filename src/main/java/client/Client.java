@@ -35,7 +35,7 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
     }
     catch (Exception e)
     {
-      throw new IllegalArgumentException(e.getMessage());
+      throw new IllegalArgumentException(e);
     }
   }
 
@@ -48,7 +48,7 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
     }
     catch (Exception e)
     {
-      throw new IllegalArgumentException(e.getMessage());
+      throw new IllegalArgumentException(e);
     }
   }
 
@@ -60,7 +60,7 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
     }
     catch (Exception e)
     {
-      throw new IllegalArgumentException(e.getMessage());
+      throw new IllegalArgumentException(e);
     }
   }
 
@@ -72,7 +72,7 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
     }
     catch (Exception e)
     {
-      throw new IllegalArgumentException(e.getMessage());
+      throw new IllegalArgumentException(e);
     }
   }
 
@@ -84,7 +84,7 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
     }
     catch (Exception e)
     {
-      throw new IllegalArgumentException(e.getMessage());
+      throw new IllegalArgumentException(e);
     }
   }
 
@@ -96,7 +96,7 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
     }
     catch (Exception e)
     {
-      throw new IllegalArgumentException(e.getMessage());
+      throw new IllegalArgumentException(e);
     }
   }
 
@@ -108,7 +108,43 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
     }
     catch (Exception e)
     {
-      throw new IllegalArgumentException(e.getMessage());
+      throw new IllegalArgumentException(e);
+    }
+  }
+
+  public void editPassword(String username, String password)
+  {
+    try
+    {
+      this.connector.editPassword(username, password);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void editEmail(String username, String email)
+  {
+    try
+    {
+      this.connector.editEmail(username, email);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void deleteProfile(String username)
+  {
+    try
+    {
+      this.connector.deleteProfile(username);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
     }
   }
 
@@ -151,6 +187,8 @@ public class Client extends UnicastRemoteObject implements RemotePropertyChangeL
         this.support.firePropertyChange("ResetFavourites", false, true);
       else if (event.getPropertyName().equals("IngredientAdded"))
         this.support.firePropertyChange("ResetIngredients", null, event.getNewValue());
+      else if (event.getPropertyName().equals("AccountCreated"))
+        this.support.firePropertyChange("AccountCreated", null, event.getNewValue());
     });
   }
 }

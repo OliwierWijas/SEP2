@@ -10,10 +10,12 @@ import java.util.ArrayList;
 public interface PersonDAO
 {
   void createMember(Member member) throws SQLException;
-  void removeMember(Member member) throws SQLException;
+  boolean login(String username, String password) throws SQLException;
+  void updateEmail(String username, String email) throws SQLException;
+  void updatePassword(String username, String password) throws SQLException;
+  void removeMember(String username) throws SQLException;
   ArrayList<Person> readMembers() throws SQLException;
   void addToFavourites(Recipe recipe, String username) throws SQLException;
   void removeFromFavourites(Recipe recipe, String username) throws SQLException;
-  boolean login(String username, String password) throws SQLException;
   void rate(Recipe recipe, String username, int rate) throws SQLException;
 }

@@ -14,8 +14,7 @@ import java.rmi.registry.Registry;
 
 public class MyApplication extends Application
 {
-  @Override public void start(Stage primaryStage)
-      throws RemoteException, NotBoundException
+  @Override public void start(Stage primaryStage) throws RemoteException, NotBoundException
   {
     Registry registry = LocateRegistry.getRegistry(1099);
     Connector connector = (Connector) registry.lookup("rmiServer");

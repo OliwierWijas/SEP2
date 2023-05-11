@@ -15,9 +15,6 @@ import java.util.ArrayList;
 
 public class RemoteConnector implements Connector
 {
-  //private RecipeList recipeList;
-  //private PersonList personList;
-  //private IngredientList ingredientList;
   private PersonDAO personDAO;
   private RecipeDAO recipeDAO;
   private IngredientDAO ingredientDAO;
@@ -25,9 +22,6 @@ public class RemoteConnector implements Connector
 
   public RemoteConnector()
   {
-    //this.recipeList = RecipeList.getInstance();
-    //this.personList = PersonList.getInstance();
-    //this.ingredientList = IngredientList.getInstance();
     try
     {
       this.personDAO = PersonDAOImplementation.getInstance();
@@ -41,7 +35,8 @@ public class RemoteConnector implements Connector
     this.support = new RemotePropertyChangeSupport();
   }
 
-  @Override public synchronized String createAccount(String email, String username, String password) throws RemoteException
+  @Override public synchronized String createAccount(String email,
+      String username, String password) throws RemoteException
   {
     UsernameValidator.validateUsername(username);
     EmailValidator.validateEmail(email);
@@ -56,10 +51,12 @@ public class RemoteConnector implements Connector
     {
       throw new RuntimeException(e);
     }
+    this.support.firePropertyChange("AccountCreated", null, member);
     return username;
   }
 
-  @Override public synchronized String login(String username, String password) throws RemoteException
+  @Override public synchronized String login(String username, String password)
+      throws RemoteException
   {
     try
     {
@@ -75,7 +72,8 @@ public class RemoteConnector implements Connector
     throw new IllegalArgumentException("The account does not exist.");
   }
 
-  @Override public synchronized void addRecipe(String title, String description, ArrayList<Ingredient> ingredients, String username) throws RemoteException
+  @Override public synchronized void addRecipe(String title, String description,
+      ArrayList<Ingredient> ingredients, String username) throws RemoteException
   {
     if (title.isEmpty() || title.equals(""))
       throw new IllegalArgumentException("Title cannot be empty.");
@@ -96,13 +94,13 @@ public class RemoteConnector implements Connector
     {
       throw new RuntimeException(e);
     }
-    /*this.recipeList.addRecipe(recipe);
-    this.personList.addRecipeToPerson(recipe, username);
-    this.ingredientList.addAllIngredients(ingredients);*/
+
     this.support.firePropertyChange("RecipeAdded", null, recipe);
   }
 
-  @Override public synchronized void editRecipe(Recipe recipe, String title, String description, ArrayList<Ingredient> ingredients, String username) throws RemoteException
+  @Override public synchronized void editRecipe(Recipe recipe, String title,
+      String description, ArrayList<Ingredient> ingredients, String username)
+      throws RemoteException
   {
     if (recipe == null)
       throw new IllegalArgumentException("No recipe selected.");
@@ -123,13 +121,11 @@ public class RemoteConnector implements Connector
       throw new RuntimeException(e);
     }
 
-    /*this.recipeList.editRecipe(recipe, title, description, ingredients);
-    this.personList.editPersonRecipe(recipe, title, description, ingredients, username);
-    this.ingredientList.addAllIngredients(ingredients);*/
     this.support.firePropertyChange("RecipeEdited", null, recipe);
   }
 
-  @Override public synchronized void removeRecipe(Recipe recipe, String username) throws RemoteException
+  @Override public synchronized void removeRecipe(Recipe recipe,
+      String username) throws RemoteException
   {
     try
     {
@@ -139,12 +135,11 @@ public class RemoteConnector implements Connector
     {
       throw new RuntimeException(e);
     }
-    /*this.recipeList.removeRecipe(recipe);
-    this.personList.removeRecipeFromPerson(recipe, username);*/
     this.support.firePropertyChange("RecipeRemoved", null, recipe);
   }
 
-  @Override public synchronized void addToFavourites(Recipe recipe, String username) throws RemoteException
+  @Override public synchronized void addToFavourites(Recipe recipe,
+      String username) throws RemoteException
   {
     try
     {
@@ -154,11 +149,11 @@ public class RemoteConnector implements Connector
     {
       throw new RuntimeException(e);
     }
-    //this.personList.addToFavourites(recipe, username);
     this.support.firePropertyChange("AddedToFavourites", null, recipe);
   }
 
-  @Override public synchronized void removeFromFavourites(Recipe recipe, String username) throws RemoteException
+  @Override public synchronized void removeFromFavourites(Recipe recipe,
+      String username) throws RemoteException
   {
     try
     {
@@ -169,10 +164,10 @@ public class RemoteConnector implements Connector
       throw new RuntimeException(e);
     }
     this.support.firePropertyChange("RemovedFromFavourites", null, recipe);
-    //this.personList.removeFromFavourites(recipe, username);
   }
 
-  @Override public synchronized ArrayList<Recipe> getAllRecipes() throws RemoteException
+  @Override public synchronized ArrayList<Recipe> getAllRecipes()
+      throws RemoteException
   {
     try
     {
@@ -182,10 +177,10 @@ public class RemoteConnector implements Connector
     {
       throw new RuntimeException(e);
     }
-    //return this.recipeList.getRecipes();
   }
 
-  @Override public ArrayList<Recipe> getRecipesByUsername(String username) throws RemoteException
+  @Override public ArrayList<Recipe> getRecipesByUsername(String username)
+      throws RemoteException
   {
     try
     {
@@ -197,7 +192,8 @@ public class RemoteConnector implements Connector
     }
   }
 
-  @Override public ArrayList<Recipe> getFavouriteRecipes(String username) throws RemoteException
+  @Override public ArrayList<Recipe> getFavouriteRecipes(String username)
+      throws RemoteException
   {
     try
     {
@@ -221,7 +217,8 @@ public class RemoteConnector implements Connector
     }
   }
 
-  @Override public synchronized ArrayList<Ingredient> getAllIngredients() throws RemoteException
+  @Override public synchronized ArrayList<Ingredient> getAllIngredients()
+      throws RemoteException
   {
     try
     {
@@ -231,10 +228,48 @@ public class RemoteConnector implements Connector
     {
       throw new RuntimeException(e);
     }
-    //return this.ingredientList.getIngredients();
   }
 
-  @Override public synchronized void addRemotePropertyChangeListener(RemotePropertyChangeListener listener) throws RemoteException
+  @Override public void editEmail(String username, String email)
+      throws RemoteException
+  {
+    try
+    {
+      this.personDAO.updateEmail(username, email);
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override public void editPassword(String username, String password)
+      throws RemoteException
+  {
+    try
+    {
+      this.personDAO.updatePassword(username, password);
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override public void deleteProfile(String username) throws RemoteException
+  {
+    try
+    {
+      this.personDAO.removeMember(username);
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override public synchronized void addRemotePropertyChangeListener(
+      RemotePropertyChangeListener listener) throws RemoteException
   {
     this.support.addPropertyChangeListener(listener);
   }

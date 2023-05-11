@@ -9,13 +9,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import model.Person;
-import model.Recipe;
 import view.ViewController;
-import view.ViewFactory;
 import view.ViewHandler;
 import view.menu.AdminMenuHandler;
 import view.menu.MenuHandler;
-import viewmodel.ManageProfilesViewModel;
+import viewmodel.ManageMemberProfileViewModel;
+import viewmodel.ManageProfilesAdminViewModel;
 
 public class ManageProfilesAdminViewController implements ViewController
 {
@@ -29,13 +28,13 @@ public class ManageProfilesAdminViewController implements ViewController
 
 
   private MenuHandler menuHandler;
-  private ManageProfilesViewModel viewModel;
+  private ManageProfilesAdminViewModel viewModel;
   private Region root;
 
-  public void init(ViewHandler viewHandler, ManageProfilesViewModel manageProfilesViewModel, Region root)
+  public void init(ViewHandler viewHandler, ManageProfilesAdminViewModel manageProfilesAdminViewModel, Region root)
   {
     this.menuHandler = AdminMenuHandler.getInstance(viewHandler);
-    this.viewModel = manageProfilesViewModel;
+    this.viewModel = manageProfilesAdminViewModel;
     this.root = root;
 
     this.viewModel.bindProfiles(profiles.itemsProperty());

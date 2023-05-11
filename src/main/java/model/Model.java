@@ -7,6 +7,7 @@ public interface Model
 {
   void createAccount(String email, String username, String password);
   String login(String username, String password);
+  String getUsername();
   void addRecipe(String title, String description, ArrayList<Ingredient> ingredients);
   void editRecipe(Recipe recipe, String title, String description, ArrayList<Ingredient> ingredients);
   void removeRecipe(Recipe recipe);
@@ -22,7 +23,8 @@ public interface Model
   ArrayList<Recipe> getFavouriteRecipesCopy();
   ArrayList<Person> getAllMembers();
   ArrayList<Person> getMembersCopy();
+  void editEmail(String username, String email);
+  void editPassword(String username, String password);
   void deleteProfile(String username);
-  void editProfile(String username, String email, String password);
   void addPropertyChangeListener(PropertyChangeListener listener);
 }

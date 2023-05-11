@@ -23,5 +23,8 @@ public interface Connector extends Remote
   ArrayList<Recipe> getFavouriteRecipes(String username) throws RemoteException;
   ArrayList<Person> getAllMembers() throws RemoteException;
   ArrayList<Ingredient> getAllIngredients() throws RemoteException;
+  void editEmail(String username, String email) throws RemoteException;
+  void editPassword(String username, String password) throws RemoteException;
+  void deleteProfile(String username) throws RemoteException;
   void addRemotePropertyChangeListener(RemotePropertyChangeListener listener) throws RemoteException;
 }
